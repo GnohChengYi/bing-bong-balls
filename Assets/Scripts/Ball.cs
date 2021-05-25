@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody2D ballRigidbody;
+
     private Vector2 lastVelocity;
 
     [SerializeField]
@@ -14,6 +15,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         ballRigidbody = GetComponent<Rigidbody2D>();
+
         // TODO let user customize velocity
         ballRigidbody.velocity = new Vector2(1f, 1f) * speed;
     }
@@ -24,10 +26,22 @@ public class Ball : MonoBehaviour
         lastVelocity = ballRigidbody.velocity;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         // velocity changed at collision, so need use last velocity
         Vector2 inDirection = lastVelocity;
         Vector2 inNormal = collision.GetContact(0).normal;
-        ballRigidbody.velocity = Vector2.Reflect(inDirection, inNormal) * speed;
+        ballRigidbody.velocity = Vector2.Reflect(inDirection, inNormal);
+    }
+
+    private void OnBecomeInvisible()
+    {
+        // TODO check all balls leave screen before wrapping up
+        UpdateHighScore();
+    }
+
+    private void UpdateHighScore()
+    {
+        // TODO send high score to Firebase
     }
 }

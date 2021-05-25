@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>593066831984-qruqedcgv9ersakoj1r1n5m8oi22vh7o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.593066831984-qruqedcgv9ersakoj1r1n5m8oi22vh7o</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAf4pB5UDXIvOJLn2GHf_AF383xrFAO14U</string>
+	<key>GCM_SENDER_ID</key>
+	<string>593066831984</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.DefaultCompany.BingBongBalls</string>
+	<key>PROJECT_ID</key>
+	<string>bing-bong-balls</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bing-bong-balls.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:593066831984:ios:2797065031d26dd40204b5</string>
+	<key>DATABASE_URL</key>
+	<string>https://bing-bong-balls-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>
