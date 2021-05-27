@@ -8,6 +8,8 @@ public class Draggable : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
 
+    private Collider2D collider;
+
     private float deltaX;
 
     private float deltaY;
@@ -18,6 +20,7 @@ public class Draggable : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
@@ -30,10 +33,7 @@ public class Draggable : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    if (
-                        GetComponent<Collider2D>() ==
-                        Physics2D.OverlapPoint(touchPos)
-                    )
+                    if (collider == Physics2D.OverlapPoint(touchPos))
                     {
                         Debug.Log("Object touched");
 
@@ -47,8 +47,7 @@ public class Draggable : MonoBehaviour
                     break;
                 case TouchPhase.Moved:
                     if (
-                        GetComponent<Collider2D>() ==
-                        Physics2D.OverlapPoint(touchPos) &&
+                        collider == Physics2D.OverlapPoint(touchPos) &&
                         moveAllowed
                     )
                     {
