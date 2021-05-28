@@ -75,7 +75,7 @@ public class AudioRenderer : MonoBehaviour
     }
 
     // write the incoming audio to the output string
-    void OnAudioFilterRead(float[] data, int channels)
+    public void OnAudioFilterRead(float[] data, int channels)
     {
         if (this.rendering)
         {

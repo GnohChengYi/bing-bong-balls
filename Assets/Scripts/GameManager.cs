@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Firebase.Leaderboard;
 using UnityEngine;
 
@@ -16,14 +17,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         leaderboard = GetComponent<LeaderboardController>();
-
-        // TODO remove before production
-        leaderboard.AddScore("userIDDDD", "usernammeee", 12344);
         audioRenderer = new AudioRenderer();
-        float[] audioData = new float[] {1F, 2F, 3F, 4F, 5F};
-        audioRenderer.Write(audioData);
-        string filename = "temp_music.wav";
-        audioRenderer.Save(filename);
+        audioRenderer.rendering = true;
     }
 
     // Update is called once per frame
@@ -59,5 +54,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = null;
         }
+        audioRenderer.Save("temp_music.wav");
+    }
+
+    // write the incoming audio to the output string
+    public void OnAudioFilterRead(float[] data, int channels)
+    {
+        audioRenderer.OnAudioFilterRead (data, channels);
     }
 }
