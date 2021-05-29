@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-// based on https://www.youtube.com/watch?v=sXc8baUK3iY
 public class Draggable : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
@@ -26,7 +27,10 @@ public class Draggable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0)
+        if (
+            Input.touchCount > 0 &&
+            GameManager.Instance.mode == GameManager.Mode.MOVE
+        )
         {
             Touch touch = Input.GetTouch(0);
             Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
@@ -35,8 +39,6 @@ public class Draggable : MonoBehaviour
                 case TouchPhase.Began:
                     if (collider == Physics2D.OverlapPoint(touchPos))
                     {
-                        Debug.Log("Object touched");
-
                         // diff btw touch position & center GameObject
                         deltaX = touchPos.x - transform.position.x;
                         deltaY = touchPos.y - transform.position.y;
@@ -51,14 +53,12 @@ public class Draggable : MonoBehaviour
                         moveAllowed
                     )
                     {
-                        Debug.Log("Object dragged");
                         float x = (float) Math.Round(touchPos.x - deltaX);
                         float y = (float) Math.Round(touchPos.y - deltaY);
                         rigidbody.MovePosition(new Vector2(x, y));
                     }
                     break;
                 case TouchPhase.Ended:
-                    Debug.Log("Object released");
                     rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
                     moveAllowed = false;
                     break;
