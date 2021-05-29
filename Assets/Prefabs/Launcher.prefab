@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5175876598057331517}
   - component: {fileID: 5175876598057331516}
   - component: {fileID: 5175876598057331506}
-  m_Layer: 0
+  - component: {fileID: 3652704890958428738}
+  m_Layer: 5
   m_Name: Launcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 5586826088988013057, guid: 0c6acc8818ea5ae4f8e8237c666e81a1, type: 3}
+--- !u!222 &3652704890958428738
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175876598057331519}
+  m_CullTransparentMesh: 0

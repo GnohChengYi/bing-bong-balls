@@ -16,15 +16,6 @@ public class GameManager : MonoBehaviour
 
     public Mode mode;
 
-    [SerializeField]
-    private GameObject simulationPanel;
-
-    [SerializeField]
-    private GameObject launcher;
-
-    [SerializeField]
-    private GameObject block;
-
     private AudioRenderer audioRenderer;
 
     private LeaderboardController leaderboard;
@@ -41,19 +32,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (Input.touchCount >= 1)
-        // {
-        //     Touch touch = Input.GetTouch(0);
-        //     if (touch.phase == TouchPhase.Began)
-        //     {
-        //         Vector2 touchPos =
-        //             Camera.main.ScreenToWorldPoint(touch.position);
-        //         if (mode == Mode.CREATE_LAUNCHER)
-        //             Instantiate(launcher, touchPos, Quaternion.identity);
-        //         else if (mode == Mode.CREATE_BLOCK)
-        //             Instantiate(block, touchPos, Quaternion.identity);
-        //     }
-        // }
     }
 
     public static GameManager Instance { get; private set; }

@@ -17,25 +17,20 @@ public class Button : MonoBehaviour
     public void OnCreateLauncherClick()
     {
         GameManager.Instance.mode = GameManager.Mode.CREATE_LAUNCHER;
-        Debug
-            .Log(GameManager.Instance.mode == GameManager.Mode.CREATE_LAUNCHER);
     }
 
     public void OnCreateBlockClick()
     {
         GameManager.Instance.mode = GameManager.Mode.CREATE_BLOCK;
-        Debug.Log(GameManager.Instance.mode == GameManager.Mode.CREATE_BLOCK);
     }
 
     public void OnMoveClick()
     {
         GameManager.Instance.mode = GameManager.Mode.MOVE;
-        Debug.Log(GameManager.Instance.mode == GameManager.Mode.MOVE);
     }
 
     public void OnRecordingClick()
     {
         GameManager.Instance.mode = GameManager.Mode.RECORDING;
-        Debug.Log(GameManager.Instance.mode == GameManager.Mode.RECORDING);
     }
 }
