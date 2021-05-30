@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 400861656}
   - component: {fileID: 400861657}
   m_Layer: 5
-  m_Name: Move Button
+  m_Name: Select Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -889,7 +889,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Move
+  m_Text: Select
 --- !u!222 &954381352
 CanvasRenderer:
   m_ObjectHideFlags: 0
