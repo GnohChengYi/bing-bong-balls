@@ -10,38 +10,34 @@ public class
 Draggable
 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private Canvas canvas;
-
-    private GraphicRaycaster graphicRaycaster;
-
+    // TODO handle offset between finger and dragged object
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
-
         // there is canvas scaler, so need divide pointer delta by canbas scale to match pointer movement
         transform.localPosition +=
             new Vector3(eventData.delta.x, eventData.delta.y, 0) /
             transform.lossyScale.x;
-        if (!canvas)
-        {
-            canvas = GetComponentInParent<Canvas>();
-            graphicRaycaster = canvas.GetComponent<GraphicRaycaster>();
-        }
-        transform.SetParent(canvas.transform, true);
         transform.SetAsLastSibling();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         // there is canvas scaler, so need divide pointer delta by canbas scale to match pointer movement
-        transform.position +=
+        transform.localPosition +=
             new Vector3(eventData.delta.x, eventData.delta.y, 0) /
             transform.lossyScale.x;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
+        // TODO fix grid dimensions for all screen sizes
+        // snap to grid: round position to nearest
+        int nearest = 30;
+        float snapX =
+            (float)((int) transform.localPosition.x / nearest) * nearest;
+        float snapY =
+            (float)((int) transform.localPosition.y / nearest) * nearest;
+        transform.localPosition = new Vector3(snapX, snapY, 0);
     }
 
     // private Rigidbody2D rigidbody;

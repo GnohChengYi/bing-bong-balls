@@ -25,7 +25,7 @@ public class SimulationPanel : MonoBehaviour
         scale = 0;
     }
 
-    private void initScale()
+    private void InitScale()
     {
         float width = rectTransform.rect.width;
         float height = rectTransform.rect.height;
@@ -38,7 +38,7 @@ public class SimulationPanel : MonoBehaviour
     {
         if (scale == 0)
         {
-            initScale();
+            InitScale();
         }
         if (Input.touchCount >= 1)
         {
