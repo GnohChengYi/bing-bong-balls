@@ -30,7 +30,6 @@ public class SimulationPanel : MonoBehaviour
         float width = rectTransform.rect.width;
         float height = rectTransform.rect.height;
         scale = Math.Min(width, height) / 8F;
-        Debug.Log (scale);
     }
 
     // Update is called once per frame

@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Button : MonoBehaviour
 {
+    private Text recordingText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,5 +35,13 @@ public class Button : MonoBehaviour
     public void OnRecordingClick()
     {
         GameManager.Instance.mode = GameManager.Mode.RECORDING;
+        if (recordingText == null)
+            recordingText = GetComponentInChildren<Text>();
+
+        // TODO improve code (e.g. use enum)
+        if (recordingText.text == "Start\nRecording")
+            recordingText.text = "Stop\nRecording";
+        else if (recordingText.text == "Stop\nRecording")
+            recordingText.text = "Start\nRecording";
     }
 }
