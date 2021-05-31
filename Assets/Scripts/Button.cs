@@ -34,14 +34,22 @@ public class Button : MonoBehaviour
 
     public void OnRecordingClick()
     {
-        GameManager.Instance.mode = GameManager.Mode.RECORDING;
         if (recordingText == null)
             recordingText = GetComponentInChildren<Text>();
 
-        // TODO improve code (e.g. use enum)
-        if (recordingText.text == "Start\nRecording")
-            recordingText.text = "Stop\nRecording";
-        else if (recordingText.text == "Stop\nRecording")
+        GameManager.Instance.mode = GameManager.Mode.MOVE;
+
+        // TODO improve code (e.g. use enum or change button image)
+        if (!GameManager.Instance.isRecording)
+        {
+            GameManager.Instance.isRecording = true;
             recordingText.text = "Start\nRecording";
+            GameManager.Instance.SaveAudio();
+        }
+        else
+        {
+            GameManager.Instance.isRecording = false;
+            recordingText.text = "Stop\nRecording";
+        }
     }
 }

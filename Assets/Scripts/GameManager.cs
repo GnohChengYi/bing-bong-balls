@@ -10,11 +10,12 @@ public class GameManager : MonoBehaviour
     {
         CREATE_LAUNCHER,
         CREATE_BLOCK,
-        MOVE,
-        RECORDING
+        MOVE
     }
 
     public Mode mode;
+
+    public bool isRecording;
 
     private AudioRenderer audioRenderer;
 
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         mode = Mode.MOVE;
+        isRecording = false;
         leaderboard = GetComponent<LeaderboardController>();
         audioRenderer = new AudioRenderer();
         audioRenderer.rendering = true;
@@ -45,12 +47,18 @@ public class GameManager : MonoBehaviour
     void OnDestroy()
     {
         if (Instance == this) Instance = null;
-        audioRenderer.Save("temp_music.wav");
     }
 
     public void OnAudioFilterRead(float[] data, int channels)
     {
-        if (mode == Mode.RECORDING)
-            audioRenderer.OnAudioFilterRead(data, channels);
+        if (isRecording) audioRenderer.OnAudioFilterRead(data, channels);
+    }
+
+    // TODO handle custom directory (including filename)
+    public void SaveAudio()
+    {
+        string filepath = Application.persistentDataPath + "/temp_music.wav";
+        audioRenderer.Save (filepath);
+        audioRenderer = new AudioRenderer();
     }
 }
