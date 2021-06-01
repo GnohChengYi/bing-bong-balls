@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8034030331936110213}
   - component: {fileID: 7318351646842184696}
-  - component: {fileID: 5175876598057331506}
+  - component: {fileID: 4122861684489647836}
   - component: {fileID: 3652704890958428738}
+  - component: {fileID: 5175876598057331506}
   - component: {fileID: 2513815416992629483}
   m_Layer: 5
   m_Name: Launcher
@@ -69,6 +70,56 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!60 &4122861684489647836
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175876598057331519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.47416687, y: 0.036346436}
+      - {x: 0.467865, y: 0.28311157}
+      - {x: 0.33685303, y: 0.28546143}
+      - {x: 0.31326294, y: 0.5013733}
+      - {x: 0.09777832, y: 0.50094604}
+      - {x: 0.0023956299, y: 0.3618164}
+      - {x: -0.10731506, y: 0.49853516}
+      - {x: -0.3293457, y: 0.49353027}
+      - {x: -0.3425598, y: 0.28164673}
+      - {x: -0.47911745, y: 0.27233484}
+      - {x: -0.4831543, y: 0.042388916}
+      - {x: -0.33843994, y: -0.046173096}
+      - {x: -0.3434906, y: -0.30767822}
+      - {x: -0.14862198, y: -0.4983176}
+      - {x: 0.14979708, y: -0.498348}
+      - {x: 0.34509277, y: -0.30804443}
+      - {x: 0.3457861, y: -0.040195525}
+--- !u!222 &3652704890958428738
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175876598057331519}
+  m_CullTransparentMesh: 0
 --- !u!114 &5175876598057331506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,14 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 5586826088988013057, guid: 0c6acc8818ea5ae4f8e8237c666e81a1, type: 3}
---- !u!222 &3652704890958428738
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5175876598057331519}
-  m_CullTransparentMesh: 0
 --- !u!114 &2513815416992629483
 MonoBehaviour:
   m_ObjectHideFlags: 0

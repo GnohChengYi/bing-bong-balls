@@ -11,18 +11,14 @@ public class Soundable : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Bong");
         audioSource.Play(0);
     }
 
     private void OnAudioFilterRead(float[] data, int channels)
     {
-        GameManager.Instance.OnAudioFilterRead(data, channels);
+        GameManager.Instance.OnAudioFilterRead (data, channels);
     }
 }

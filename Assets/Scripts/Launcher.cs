@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Launcher : MonoBehaviour
 {
+    private float speed = 3.0F;
+
     [SerializeField]
     private GameObject ballPrefab;
 
     // Start is called before the first frame update
     private void Start()
     {
-        Instantiate(ballPrefab, transform.position, Quaternion.identity);
+        Launch();
     }
 
-    // Update is called once per frame
-    private void Update()
+    private void Launch()
     {
-        
+        GameObject ball = Instantiate(ballPrefab);
+        ball.transform.position = transform.position + transform.up;
+        ball.transform.rotation = transform.rotation;
+        ball.GetComponent<Rigidbody2D>().velocity = transform.up * speed;
     }
 }
