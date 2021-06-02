@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     {
         CREATE_LAUNCHER,
         CREATE_BLOCK,
-        MOVE
+        SELECT
     }
 
     public Mode mode;
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mode = Mode.MOVE;
+        mode = Mode.SELECT;
         isRecording = false;
         leaderboard = GetComponent<LeaderboardController>();
         audioRenderer = new AudioRenderer();

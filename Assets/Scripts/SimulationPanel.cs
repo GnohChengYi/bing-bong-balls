@@ -25,25 +25,15 @@ public class SimulationPanel : MonoBehaviour
         scale = 0;
     }
 
-    private void InitScale()
-    {
-        float width = rectTransform.rect.width;
-        float height = rectTransform.rect.height;
-        scale = Math.Min(width, height) / 8F;
-    }
-
     // Update is called once per frame
     private void Update()
     {
-        if (scale == 0)
-        {
-            InitScale();
-        }
+        if (scale == 0) InitScale();
         if (Input.touchCount >= 1)
         {
             Touch touch = Input.GetTouch(0);
             if (
-                touch.phase == TouchPhase.Began &&
+                touch.phase == TouchPhase.Ended &&
                 RectTransformUtility
                     .RectangleContainsScreenPoint(rectTransform,
                     touch.position,
@@ -75,7 +65,15 @@ public class SimulationPanel : MonoBehaviour
                         transform);
                     newBlock.transform.localScale *= scale;
                 }
+                GameManager.Instance.mode = GameManager.Mode.SELECT;
             }
         }
+    }
+
+    private void InitScale()
+    {
+        float width = rectTransform.rect.width;
+        float height = rectTransform.rect.height;
+        scale = Math.Min(width, height) / 8F;
     }
 }

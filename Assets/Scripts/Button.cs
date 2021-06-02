@@ -29,7 +29,7 @@ public class Button : MonoBehaviour
 
     public void OnMoveClick()
     {
-        GameManager.Instance.mode = GameManager.Mode.MOVE;
+        GameManager.Instance.mode = GameManager.Mode.SELECT;
     }
 
     public void OnRecordingClick()
@@ -37,7 +37,7 @@ public class Button : MonoBehaviour
         if (recordingText == null)
             recordingText = GetComponentInChildren<Text>();
 
-        GameManager.Instance.mode = GameManager.Mode.MOVE;
+        GameManager.Instance.mode = GameManager.Mode.SELECT;
 
         // TODO improve code (e.g. use enum or change button image)
         if (!GameManager.Instance.isRecording)

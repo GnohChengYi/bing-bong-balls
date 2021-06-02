@@ -1,16 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Block : MonoBehaviour
+public class Block : MonoBehaviour, ISelectHandler
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnSelect(BaseEventData eventData)
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        Debug.Log("Block selected");
     }
 }
