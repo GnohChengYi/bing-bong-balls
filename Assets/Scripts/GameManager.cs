@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Firebase.Leaderboard;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,12 @@ public class GameManager : MonoBehaviour
     }
 
     public Mode mode;
+
+    // auto deselect when click on Panel, so need to select back last selected Launcher or Block
+    public Selectable lastSelected;
+
+    // selected launcher, null when no launcher selected;
+    public Launcher launcher;
 
     public bool isRecording;
 

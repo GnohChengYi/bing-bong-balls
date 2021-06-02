@@ -5,40 +5,57 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Launcher : MonoBehaviour, ISelectHandler
+public class Launcher : MonoBehaviour, ISelectHandler, IDeselectHandler, IBeginDragHandler
 {
     private float speed = 3.0F;
 
     [SerializeField]
     private GameObject ballPrefab;
 
+    private Selectable selectable;
+
+    public bool shouldLaunch;
+
     // Start is called before the first frame update
     private void Start()
     {
-        Launch();
+        selectable = GetComponent<Selectable>();
+        selectable.Select();
+        GameManager.Instance.lastSelected = selectable;
+        GameManager.Instance.launcher = this;
     }
 
     private void Update()
     {
-        FaceTouch();
+        if (EventSystem.current.currentSelectedGameObject == gameObject)
+            FacePointer();
     }
-
-    public static Launcher Instance { get; private set; }
 
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log("Launcher selected");
-        Instance = this;
+        GameManager.Instance.lastSelected = selectable;
+        GameManager.Instance.launcher = this;
     }
 
-    private void FaceTouch()
+    public void OnDeselect(BaseEventData eventData)
     {
-        Vector3 selfPosition = Camera.main.WorldToScreenPoint(transform.position);
+        shouldLaunch = false;
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        shouldLaunch = false;
+    }
+
+    private void FacePointer()
+    {
+        Vector3 selfPosition =
+            Camera.main.WorldToScreenPoint(transform.position);
         Vector3 upwards = Input.mousePosition - selfPosition;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, upwards);
     }
 
-    private void Launch()
+    public void Launch()
     {
         GameObject ball = Instantiate(ballPrefab);
         ball.transform.position = transform.position + transform.up;

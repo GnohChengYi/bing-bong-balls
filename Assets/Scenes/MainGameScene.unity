@@ -494,6 +494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 2
+  lastSelected: {fileID: 0}
+  launcher: {fileID: 0}
   isRecording: 0
 --- !u!20 &519420031
 Camera:
@@ -1514,6 +1516,7 @@ MonoBehaviour:
   camera: {fileID: 519420031}
   launcher: {fileID: 5175876598057331519, guid: 1976aa02a653a4d4893db77476c5a7d0, type: 3}
   block: {fileID: 7972078747714473479, guid: f154997c43ea746429adb242b30a5711, type: 3}
+  scale: 0
 --- !u!1 &1807151941
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SimulationPanel : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class SimulationPanel : MonoBehaviour
 
     private RectTransform rectTransform;
 
-    private float scale;
+    public float scale;
 
     // Start is called before the first frame update
     private void Start()
@@ -32,40 +34,33 @@ public class SimulationPanel : MonoBehaviour
         if (Input.touchCount >= 1)
         {
             Touch touch = Input.GetTouch(0);
-            if (
-                touch.phase == TouchPhase.Ended &&
-                RectTransformUtility
-                    .RectangleContainsScreenPoint(rectTransform,
-                    touch.position,
-                    camera)
-            )
+            if (!InPanel(touch)) return;
+            if (touch.phase == TouchPhase.Began)
             {
-                Vector2 touchPos =
-                    Camera.main.ScreenToWorldPoint(touch.position);
+                // auto deselect when click on Panel, so need to select back last selected Launcher or Block
+                Selectable lastSelected = GameManager.Instance.lastSelected;
+                if (lastSelected) lastSelected.Select();
+            }
+            else if (touch.phase == TouchPhase.Ended)
+            {
                 if (
                     GameManager.Instance.mode ==
                     GameManager.Mode.CREATE_LAUNCHER
                 )
-                {
-                    GameObject newLauncher =
-                        Instantiate(launcher,
-                        touchPos,
-                        Quaternion.identity,
-                        transform);
-                    newLauncher.transform.localScale *= scale;
-                }
+                    CreateAt(launcher, touch);
                 else if (
                     GameManager.Instance.mode == GameManager.Mode.CREATE_BLOCK
                 )
+                    CreateAt(block, touch);
+                else if (GameManager.Instance.mode == GameManager.Mode.SELECT)
                 {
-                    GameObject newBlock =
-                        Instantiate(block,
-                        touchPos,
-                        Quaternion.identity,
-                        transform);
-                    newBlock.transform.localScale *= scale;
+                    Launcher launcher = GameManager.Instance.launcher;
+                    if (!launcher) return;
+                    if (launcher.shouldLaunch)
+                        launcher.Launch();
+                    else
+                        launcher.shouldLaunch = true;
                 }
-                GameManager.Instance.mode = GameManager.Mode.SELECT;
             }
         }
     }
@@ -75,5 +70,23 @@ public class SimulationPanel : MonoBehaviour
         float width = rectTransform.rect.width;
         float height = rectTransform.rect.height;
         scale = Math.Min(width, height) / 8F;
+    }
+
+    private bool InPanel(Touch touch)
+    {
+        return RectTransformUtility
+            .RectangleContainsScreenPoint(rectTransform,
+            touch.position,
+            camera);
+    }
+
+    // TODO create at same z as panel
+    private void CreateAt(GameObject gameObject, Touch touch)
+    {
+        Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+        GameObject newGameObject =
+            Instantiate(gameObject, touchPos, Quaternion.identity, transform);
+        newGameObject.transform.localScale *= scale;
+        GameManager.Instance.mode = GameManager.Mode.SELECT;
     }
 }
