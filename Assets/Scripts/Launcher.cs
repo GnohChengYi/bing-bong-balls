@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Launcher : MonoBehaviour, ISelectHandler, IDeselectHandler, IBeginDragHandler
+public class Launcher : MonoBehaviour, ISelectHandler, IDeselectHandler, IEndDragHandler
 {
     private float speed = 3.0F;
 
@@ -42,7 +42,7 @@ public class Launcher : MonoBehaviour, ISelectHandler, IDeselectHandler, IBeginD
         shouldLaunch = false;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnEndDrag(PointerEventData eventData)
     {
         shouldLaunch = false;
     }

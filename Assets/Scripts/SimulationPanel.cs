@@ -40,6 +40,8 @@ public class SimulationPanel : MonoBehaviour
                 // auto deselect when click on Panel, so need to select back last selected Launcher or Block
                 Selectable lastSelected = GameManager.Instance.lastSelected;
                 if (lastSelected) lastSelected.Select();
+                Launcher launcher = GameManager.Instance.launcher;
+                if (launcher) launcher.shouldLaunch = true;
             }
             else if (touch.phase == TouchPhase.Ended)
             {
@@ -56,10 +58,7 @@ public class SimulationPanel : MonoBehaviour
                 {
                     Launcher launcher = GameManager.Instance.launcher;
                     if (!launcher) return;
-                    if (launcher.shouldLaunch)
-                        launcher.Launch();
-                    else
-                        launcher.shouldLaunch = true;
+                    if (launcher.shouldLaunch) launcher.Launch();
                 }
             }
         }
