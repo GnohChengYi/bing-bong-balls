@@ -11,10 +11,10 @@ public class SimulationPanel : MonoBehaviour
     private Camera camera;
 
     [SerializeField]
-    private GameObject launcher;
+    private GameObject launcherPrefab;
 
     [SerializeField]
-    private GameObject block;
+    private GameObject blockPrefab;
 
     private RectTransform rectTransform;
 
@@ -35,30 +35,34 @@ public class SimulationPanel : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
             if (!InPanel(touch)) return;
+            Launcher launcher = GameManager.Instance.launcher;
             if (touch.phase == TouchPhase.Began)
             {
                 // auto deselect when click on Panel, so need to select back last selected Launcher or Block
                 Selectable lastSelected = GameManager.Instance.lastSelected;
                 if (lastSelected) lastSelected.Select();
-                Launcher launcher = GameManager.Instance.launcher;
-                if (launcher) launcher.shouldLaunch = true;
+                Debug.Log("Began");
             }
             else if (touch.phase == TouchPhase.Ended)
             {
+                Debug.Log("End");
                 if (
                     GameManager.Instance.mode ==
                     GameManager.Mode.CREATE_LAUNCHER
                 )
-                    CreateAt(launcher, touch);
+                    CreateAt(launcherPrefab, touch);
                 else if (
                     GameManager.Instance.mode == GameManager.Mode.CREATE_BLOCK
                 )
-                    CreateAt(block, touch);
+                    CreateAt(blockPrefab, touch);
                 else if (GameManager.Instance.mode == GameManager.Mode.SELECT)
                 {
-                    Launcher launcher = GameManager.Instance.launcher;
                     if (!launcher) return;
-                    if (launcher.shouldLaunch) launcher.Launch();
+                    if (launcher.isActive)
+                    {
+                        launcher.FacePointer();
+                        launcher.Launch();
+                    }
                 }
             }
         }

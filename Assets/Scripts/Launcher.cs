@@ -5,7 +5,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Launcher : MonoBehaviour, ISelectHandler, IDeselectHandler, IEndDragHandler
+public class
+Launcher
+: MonoBehaviour, ISelectHandler, IDeselectHandler, IBeginDragHandler
 {
     private float speed = 3.0F;
 
@@ -14,9 +16,8 @@ public class Launcher : MonoBehaviour, ISelectHandler, IDeselectHandler, IEndDra
 
     private Selectable selectable;
 
-    public bool shouldLaunch;
+    public bool isActive = true;
 
-    // Start is called before the first frame update
     private void Start()
     {
         selectable = GetComponent<Selectable>();
@@ -25,29 +26,27 @@ public class Launcher : MonoBehaviour, ISelectHandler, IDeselectHandler, IEndDra
         GameManager.Instance.launcher = this;
     }
 
-    private void Update()
-    {
-        if (EventSystem.current.currentSelectedGameObject == gameObject)
-            FacePointer();
-    }
-
     public void OnSelect(BaseEventData eventData)
     {
+        Debug.Log("OnSelect");
         GameManager.Instance.lastSelected = selectable;
         GameManager.Instance.launcher = this;
+        isActive = true;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        shouldLaunch = false;
+        Debug.Log("OnDeselect");
+        GameManager.Instance.launcher = null;
+        isActive = false;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        shouldLaunch = false;
+        isActive = false;
     }
 
-    private void FacePointer()
+    public void FacePointer()
     {
         Vector3 selfPosition =
             Camera.main.WorldToScreenPoint(transform.position);
