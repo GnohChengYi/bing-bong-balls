@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     public bool isRecording;
 
-    private AudioRenderer audioRenderer;
+    public AudioRenderer audioRenderer;
 
     private LeaderboardController leaderboard;
 
@@ -32,15 +32,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         mode = Mode.SELECT;
-        isRecording = false;
         leaderboard = GetComponent<LeaderboardController>();
         audioRenderer = new AudioRenderer();
         audioRenderer.rendering = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     public static GameManager Instance { get; private set; }
@@ -66,6 +60,6 @@ public class GameManager : MonoBehaviour
     {
         string filepath = Application.persistentDataPath + "/temp_music.wav";
         audioRenderer.Save (filepath);
-        audioRenderer = new AudioRenderer();
+        audioRenderer.Clear();
     }
 }

@@ -28,7 +28,6 @@ Launcher
 
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log("OnSelect");
         GameManager.Instance.lastSelected = selectable;
         GameManager.Instance.launcher = this;
         isActive = true;
@@ -36,7 +35,6 @@ Launcher
 
     public void OnDeselect(BaseEventData eventData)
     {
-        Debug.Log("OnDeselect");
         GameManager.Instance.launcher = null;
         isActive = false;
     }

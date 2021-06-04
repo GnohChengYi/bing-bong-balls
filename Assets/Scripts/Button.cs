@@ -42,14 +42,16 @@ public class Button : MonoBehaviour
         // TODO improve code (e.g. use enum or change button image)
         if (!GameManager.Instance.isRecording)
         {
+            Debug.Log("not recording, record now");
             GameManager.Instance.isRecording = true;
-            recordingText.text = "Start\nRecording";
-            GameManager.Instance.SaveAudio();
+            recordingText.text = "Stop\nRecording";
         }
         else
         {
+            Debug.Log("recording, stop now");
             GameManager.Instance.isRecording = false;
-            recordingText.text = "Stop\nRecording";
+            GameManager.Instance.SaveAudio();
+            recordingText.text = "Start\nRecording";
         }
     }
 }
