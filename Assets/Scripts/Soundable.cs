@@ -21,6 +21,6 @@ public class Soundable : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        audioSource.Play(0);
+        audioSource.Play();
     }
 }
