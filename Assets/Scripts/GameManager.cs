@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private LeaderboardController leaderboard;
 
-    // Start is called before the first frame update
+    // TODO fix screen orientation
     void Start()
     {
         mode = Mode.SELECT;
@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowSaveDialog()
     {
+        // TODO disable (set enabled=false or sth) touch on simulation panel and toolbar
         saveDialog.SetActive(true);
     }
 
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
         int bitDepth = 16;
         int bitRate = frequency * bitDepth * channels;
         EncodeMP3.convert (recordingClip, filepath, bitRate);
+        // TODO show toast save directory
         CancelAudio();
     }
 

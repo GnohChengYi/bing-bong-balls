@@ -29,7 +29,7 @@ public class Button : MonoBehaviour
 
         GameManager.Instance.mode = GameManager.Mode.SELECT;
 
-        // TODO improve code (e.g. use enum or change button image)
+        // TODO improve code if needed (e.g. use enum or change button image)
         if (!GameManager.Instance.isRecording)
         {
             Debug.Log("not recording, record now");
