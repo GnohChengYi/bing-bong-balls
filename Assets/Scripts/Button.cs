@@ -7,16 +7,6 @@ public class Button : MonoBehaviour
 {
     private Text recordingText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     public void OnCreateLauncherClick()
     {
         GameManager.Instance.mode = GameManager.Mode.CREATE_LAUNCHER;
@@ -50,7 +40,7 @@ public class Button : MonoBehaviour
         {
             Debug.Log("recording, stop now");
             GameManager.Instance.isRecording = false;
-            GameManager.Instance.SaveAudio();
+            GameManager.Instance.ShowSaveDialog();
             recordingText.text = "Start\nRecording";
         }
     }

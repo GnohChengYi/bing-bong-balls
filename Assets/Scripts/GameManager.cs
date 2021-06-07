@@ -25,9 +25,10 @@ public class GameManager : MonoBehaviour
 
     public bool isRecording;
 
-    public AudioRenderer audioRenderer;
-
     private List<float> audioDataList;
+
+    [SerializeField]
+    private GameObject saveDialog;
 
     private AudioClip recordingClip;
 
@@ -38,8 +39,6 @@ public class GameManager : MonoBehaviour
     {
         mode = Mode.SELECT;
         leaderboard = GetComponent<LeaderboardController>();
-        audioRenderer = new AudioRenderer();
-        audioRenderer.rendering = true;
         audioDataList = new List<float>();
     }
 
@@ -61,16 +60,16 @@ public class GameManager : MonoBehaviour
         if (isRecording)
         {
             audioDataList.AddRange (data);
-            // audioRenderer.OnAudioFilterRead (data, channels); // front or back blank in wav smh
         }
     }
 
-    // TODO handle custom directory (including filename)
-    public void SaveAudio()
+    public void ShowSaveDialog()
     {
-        // string filepath = Application.persistentDataPath + "/temp_music.wav";
-        // audioRenderer.Save (filepath);
-        // audioRenderer.Clear();
+        saveDialog.SetActive(true);
+    }
+
+    public void SaveAudio(string filename)
+    {
         float[] audioData = audioDataList.ToArray();
         int channels = 2;
         int lengthSamples = audioData.Length / channels;
@@ -79,9 +78,15 @@ public class GameManager : MonoBehaviour
             AudioClip
                 .Create("Recording", lengthSamples, channels, frequency, false);
         recordingClip.SetData(audioData, 0);
-        string filepath = Application.persistentDataPath + "/temp_music.mp3";
+        string filepath = Application.persistentDataPath + "/" + filename;
         int bitDepth = 16;
         int bitRate = frequency * bitDepth * channels;
         EncodeMP3.convert (recordingClip, filepath, bitRate);
+        CancelAudio();
+    }
+
+    public void CancelAudio()
+    {
+        audioDataList.Clear();
     }
 }
