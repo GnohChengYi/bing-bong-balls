@@ -38,8 +38,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         mode = Mode.SELECT;
-        leaderboard = GetComponent<LeaderboardController>();
+        Audio.InitializeClips();
         audioDataList = new List<float>();
+        leaderboard = GetComponent<LeaderboardController>();
     }
 
     public static GameManager Instance { get; private set; }

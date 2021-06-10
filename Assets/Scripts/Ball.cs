@@ -4,11 +4,25 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private Rigidbody2D ballRigidbody;
+    private AudioSource audioSource;
 
     private void Start()
     {
-        ballRigidbody = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
+        gameObject.name = Audio.lastSelectedInstrument;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject other = collision.gameObject;
+        if (other.tag == "Block")
+        {
+            string instrument = gameObject.name;
+            string note = other.name;
+            AudioClip audioClip = Audio.GetClip(instrument, note);
+            audioSource.clip = audioClip;
+            audioSource.Play();
+        }
     }
 
     private void OnBecameInvisible()

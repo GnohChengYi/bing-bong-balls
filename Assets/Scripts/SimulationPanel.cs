@@ -52,7 +52,10 @@ public class SimulationPanel : MonoBehaviour
                 else if (
                     GameManager.Instance.mode == GameManager.Mode.CREATE_BLOCK
                 )
-                    CreateAt(blockPrefab, touch);
+                {
+                    GameObject block = CreateAt (blockPrefab, touch) as GameObject;
+                    block.name = Audio.lastSelectedNote;
+                }
                 else if (GameManager.Instance.mode == GameManager.Mode.SELECT)
                 {
                     if (!launcher) return;
@@ -82,12 +85,13 @@ public class SimulationPanel : MonoBehaviour
     }
 
     // TODO create at same z as panel
-    private void CreateAt(GameObject gameObject, Touch touch)
+    private GameObject CreateAt(GameObject gameObject, Touch touch)
     {
         Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
         GameObject newGameObject =
             Instantiate(gameObject, touchPos, Quaternion.identity, transform);
         newGameObject.transform.localScale *= scale;
         GameManager.Instance.mode = GameManager.Mode.SELECT;
+        return newGameObject;
     }
 }
