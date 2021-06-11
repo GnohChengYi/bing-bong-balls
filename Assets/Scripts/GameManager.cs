@@ -8,14 +8,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public enum Mode
-    {
-        CREATE_LAUNCHER,
-        CREATE_BLOCK,
-        SELECT
-    }
-
     public Mode mode;
+
+    public Operation operation;
 
     // auto deselect when click on Panel, so need to select back last selected Launcher or Block
     public Selectable lastSelected;
@@ -37,7 +32,7 @@ public class GameManager : MonoBehaviour
     // TODO fix screen orientation
     void Start()
     {
-        mode = Mode.SELECT;
+        operation = Operation.SELECT;
         Audio.InitializeClips();
         audioDataList = new List<float>();
         leaderboard = GetComponent<LeaderboardController>();
@@ -84,6 +79,7 @@ public class GameManager : MonoBehaviour
         int bitDepth = 16;
         int bitRate = frequency * bitDepth * channels;
         EncodeMP3.convert (recordingClip, filepath, bitRate);
+
         // TODO show toast save directory
         CancelAudio();
     }

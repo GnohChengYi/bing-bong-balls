@@ -44,19 +44,15 @@ public class SimulationPanel : MonoBehaviour
             }
             else if (touch.phase == TouchPhase.Ended)
             {
-                if (
-                    GameManager.Instance.mode ==
-                    GameManager.Mode.CREATE_LAUNCHER
-                )
+                if (GameManager.Instance.operation == Operation.CREATE_LAUNCHER)
                     CreateAt(launcherPrefab, touch);
-                else if (
-                    GameManager.Instance.mode == GameManager.Mode.CREATE_BLOCK
-                )
+                else if (GameManager.Instance.operation == Operation.CREATE_BLOCK)
                 {
-                    GameObject block = CreateAt (blockPrefab, touch) as GameObject;
+                    GameObject block =
+                        CreateAt(blockPrefab, touch) as GameObject;
                     block.name = Audio.lastSelectedNote;
                 }
-                else if (GameManager.Instance.mode == GameManager.Mode.SELECT)
+                else if (GameManager.Instance.operation == Operation.SELECT)
                 {
                     if (!launcher) return;
                     if (launcher.isActive)
@@ -91,7 +87,7 @@ public class SimulationPanel : MonoBehaviour
         GameObject newGameObject =
             Instantiate(gameObject, touchPos, Quaternion.identity, transform);
         newGameObject.transform.localScale *= scale;
-        GameManager.Instance.mode = GameManager.Mode.SELECT;
+        GameManager.Instance.operation = Operation.SELECT;
         return newGameObject;
     }
 }

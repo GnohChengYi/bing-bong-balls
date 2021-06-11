@@ -9,17 +9,17 @@ public class Button : MonoBehaviour
 
     public void OnCreateLauncherClick()
     {
-        GameManager.Instance.mode = GameManager.Mode.CREATE_LAUNCHER;
+        GameManager.Instance.operation = Operation.CREATE_LAUNCHER;
     }
 
     public void OnCreateBlockClick()
     {
-        GameManager.Instance.mode = GameManager.Mode.CREATE_BLOCK;
+        GameManager.Instance.operation = Operation.CREATE_BLOCK;
     }
 
     public void OnMoveClick()
     {
-        GameManager.Instance.mode = GameManager.Mode.SELECT;
+        GameManager.Instance.operation = Operation.SELECT;
     }
 
     public void OnRecordingClick()
@@ -27,7 +27,7 @@ public class Button : MonoBehaviour
         if (recordingText == null)
             recordingText = GetComponentInChildren<Text>();
 
-        GameManager.Instance.mode = GameManager.Mode.SELECT;
+        GameManager.Instance.operation = Operation.SELECT;
 
         // TODO improve code if needed (e.g. use enum or change button image)
         if (!GameManager.Instance.isRecording)
