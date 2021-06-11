@@ -10,7 +10,6 @@ public class
 Draggable
 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    // TODO handle offset between finger and dragged object
     public void OnBeginDrag(PointerEventData eventData)
     {
         transform.localPosition += GetDeltaVector(eventData);
