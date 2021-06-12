@@ -67,14 +67,9 @@ public class GameManager : MonoBehaviour
 
     public void SaveAudio(string filename)
     {
-        float[] audioData = audioDataList.ToArray();
         int channels = 2;
-        int lengthSamples = audioData.Length / channels;
         int frequency = 44100;
-        recordingClip =
-            AudioClip
-                .Create("Recording", lengthSamples, channels, frequency, false);
-        recordingClip.SetData(audioData, 0);
+        AudioClip recordingClip = Audio.ListToClip(audioDataList);
         string filepath = Application.persistentDataPath + "/" + filename;
         int bitDepth = 16;
         int bitRate = frequency * bitDepth * channels;

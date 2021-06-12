@@ -5,7 +5,7 @@ using UnityEngine;
 public class Audio
 {
     // TODO make sure complete and filenames match these
-    private static string[] instruments = new string[] { "Piano" };
+    public static string[] instruments = new string[] { "Piano" };
 
     private static string[]
         notes =
@@ -79,5 +79,21 @@ public class Audio
     {
         string message = "GetClip " + instrument + " " + note;
         return instrumentToNotes[instrument][note];
+    }
+
+    public static AudioClip
+    ListToClip(
+        List<float> audioDataList,
+        int channels = 2,
+        int frequency = 44100
+    )
+    {
+        float[] audioData = audioDataList.ToArray();
+        int lengthSamples = audioData.Length / channels;
+        AudioClip audioClip =
+            AudioClip
+                .Create("AudioClip", lengthSamples, channels, frequency, false);
+        audioClip.SetData(audioData, 0);
+        return audioClip;
     }
 }
