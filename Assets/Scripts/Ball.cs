@@ -29,8 +29,6 @@ public class Ball : MonoBehaviour
     {
         // TODO check all balls leave screen before wrapping up
         UpdateHighScore();
-
-        // TODO make sure actually destory ball by checking scene
         Destroy (gameObject);
     }
 

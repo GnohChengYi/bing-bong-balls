@@ -9,10 +9,12 @@ public class
 Launcher
 : MonoBehaviour, ISelectHandler, IDeselectHandler, IBeginDragHandler
 {
-    private float speed = 3.0F;
-
     [SerializeField]
     private GameObject ballPrefab;
+
+    private float speed = 3.0F;
+
+    public string instrument;
 
     private Selectable selectable;
 
@@ -24,6 +26,7 @@ Launcher
         selectable.Select();
         GameManager.Instance.lastSelected = selectable;
         GameManager.Instance.launcher = this;
+        instrument = Audio.lastSelectedInstrument;
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -58,5 +61,6 @@ Launcher
         ball.transform.position = transform.position + transform.up;
         ball.transform.rotation = transform.rotation;
         ball.GetComponent<Rigidbody2D>().velocity = transform.up * speed;
+        ball.name = instrument;
     }
 }
