@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public Mode mode;
 
+    public Puzzle puzzle;
+
     public Operation operation;
 
     // auto deselect when click on Panel, so need to select back last selected Launcher or Block
@@ -53,10 +55,8 @@ public class GameManager : MonoBehaviour
 
     public void OnAudioFilterRead(float[] data, int channels)
     {
-        if (isRecording)
-        {
-            audioDataList.AddRange (data);
-        }
+        if (isRecording) audioDataList.AddRange(data);
+
     }
 
     public void ShowSaveDialog()
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         string filepath = Application.persistentDataPath + "/" + filename;
         int bitDepth = 16;
         int bitRate = frequency * bitDepth * channels;
-        EncodeMP3.convert (recordingClip, filepath, bitRate);
+        EncodeMP3.convert(recordingClip, filepath, bitRate);
 
         // TODO show toast save directory
         CancelAudio();
