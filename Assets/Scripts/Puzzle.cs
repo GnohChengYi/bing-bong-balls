@@ -77,6 +77,7 @@ public class Puzzle
     public static void InitPuzzles()
     {
         puzzles = new List<Puzzle>();
+        // TODO try use [SerializeField] for TextAsset for .txt
         string rawText = Resources.Load<TextAsset>("puzzles").text;
         string[] lines = rawText.Split('\n');
         foreach (string line in lines)

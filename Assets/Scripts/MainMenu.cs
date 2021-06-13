@@ -5,17 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayFreePlay ()
+    public void PlayFreePlay()
     {
         SceneManager.LoadScene(1);
     }
 
-    // public void PlayPuzzle ()
-    // {
-    //     SceneManager.LoadScene(2);
-    // }
+    public void PlayPuzzle()
+    {
+        SceneManager.LoadScene(2);
+    }
 
-    public void QuitGame ()
+    public void QuitGame()
     {
         Application.Quit();
     }
