@@ -69,9 +69,9 @@ public class Audio
             {
                 string path = instrument + "/" + note;
                 AudioClip clip = Resources.Load<AudioClip>(path);
-                noteToClip.Add (note, clip);
+                noteToClip.Add(note, clip);
             }
-            instrumentToNotes.Add (instrument, noteToClip);
+            instrumentToNotes.Add(instrument, noteToClip);
         }
     }
 
@@ -90,9 +90,8 @@ public class Audio
     {
         float[] audioData = audioDataList.ToArray();
         int lengthSamples = audioData.Length / channels;
-        AudioClip audioClip =
-            AudioClip
-                .Create("AudioClip", lengthSamples, channels, frequency, false);
+        AudioClip audioClip = AudioClip.Create(
+            "AudioClip", lengthSamples, channels, frequency, false);
         audioClip.SetData(audioData, 0);
         return audioClip;
     }

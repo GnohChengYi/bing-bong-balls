@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Button : MonoBehaviour
+public class OperationButtons : MonoBehaviour
 {
     public void OnCreateLauncherClick()
     {
@@ -15,7 +12,7 @@ public class Button : MonoBehaviour
         GameManager.Instance.operation = Operation.CREATE_BLOCK;
     }
 
-    public void OnMoveClick()
+    public void OnSelectClick()
     {
         GameManager.Instance.operation = Operation.SELECT;
     }

@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
 {
     public Mode mode;
 
-    public Puzzle puzzle;
+    [SerializeField]
+    private GameObject listenPuzzleButton;
 
     public Operation operation;
 
@@ -32,25 +33,38 @@ public class GameManager : MonoBehaviour
     private LeaderboardController leaderboard;
 
     // TODO fix screen orientation
-    void Start()
+    private void Start()
     {
-        operation = Operation.SELECT;
-        Audio.InitializeClips();
-        audioDataList = new List<float>();
         leaderboard = GetComponent<LeaderboardController>();
     }
 
     public static GameManager Instance { get; private set; }
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null) Destroy(Instance);
         Instance = this;
     }
 
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+    }
+
+    private void OnRenderObject()
+    {
+        if (Puzzle.selectedPuzzle == null)
+        {
+            mode = Mode.FREE_PLAY;
+            listenPuzzleButton.SetActive(false);
+        }
+        else
+        {
+            mode = Mode.PUZZLE;
+            listenPuzzleButton.SetActive(true);
+        }
+        operation = Operation.SELECT;
+        audioDataList = new List<float>();
     }
 
     public void OnAudioFilterRead(float[] data, int channels)

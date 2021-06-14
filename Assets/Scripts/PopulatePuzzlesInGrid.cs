@@ -10,11 +10,16 @@ public class PopulatePuzzlesInGrid : MonoBehaviour
 
     private void Start()
     {
-        Puzzle.InitPuzzles();
+        Puzzle.Init();
         foreach (Puzzle puzzle in Puzzle.puzzles)
         {
-            GameObject puzzleObject = (GameObject)Instantiate(puzzlePrefab, transform);
-            puzzleObject.GetComponentInChildren<Text>().text = puzzle.title;
+            GameObject puzzleObject =
+                (GameObject)Instantiate(puzzlePrefab, transform);
+            Text text = puzzleObject.GetComponentInChildren<Text>();
+            text.text = puzzle.title;
+            Button button = puzzleObject.GetComponent<Button>();
+            button.onClick.AddListener(
+                () => Puzzle.selectedPuzzle = puzzle);
         }
     }
 }

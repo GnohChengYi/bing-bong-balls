@@ -7,6 +7,8 @@ public class Puzzle
 {
     public static List<Puzzle> puzzles;
 
+    public static Puzzle selectedPuzzle;
+
     public readonly string title;
 
     // TODO create getter
@@ -28,7 +30,7 @@ public class Puzzle
             float[] samples = new float[audioClip.samples * audioClip.channels];
             audioClip.GetData(samples, 0);
             audioDataList.AddRange(samples);
-            float[] muteSamples = new float[samples.Length];
+            float[] muteSamples = new float[samples.Length / 2];
             audioDataList.AddRange(muteSamples);
         }
         return Audio.ListToClip(audioDataList);
@@ -74,8 +76,9 @@ public class Puzzle
     // Comma separated values, first entry is title, remaining entries are notes
     // e.g.
     // 1,a3,a4,a-3
-    public static void InitPuzzles()
+    public static void Init()
     {
+        selectedPuzzle = null;
         puzzles = new List<Puzzle>();
         // TODO try use [SerializeField] for TextAsset for .txt
         string rawText = Resources.Load<TextAsset>("puzzles").text;
