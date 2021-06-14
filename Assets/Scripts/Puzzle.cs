@@ -8,6 +8,7 @@ public class Puzzle
     public static List<Puzzle> puzzles;
 
     public static Puzzle selectedPuzzle;
+    public static List<string> submission;
 
     public readonly string title;
 
@@ -36,13 +37,13 @@ public class Puzzle
         return Audio.ListToClip(audioDataList);
     }
 
-    public int GetScore(List<string> submission)
+    public int GetScore()
     {
-        return notes.Count - EditDistanceBetweenNotesAnd(submission);
+        return notes.Count - EditDistanceBetweenNotesAndSubmission();
     }
 
     // Wagner-Fischer algorithm
-    private int EditDistanceBetweenNotesAnd(List<string> submission)
+    private int EditDistanceBetweenNotesAndSubmission()
     {
         Debug.Log("notes: " + string.Join(", ", notes.ToArray()));
         int[,] distances = new int[notes.Count + 1, submission.Count + 1];
@@ -78,7 +79,6 @@ public class Puzzle
     // 1,a3,a4,a-3
     public static void Init()
     {
-        selectedPuzzle = null;
         puzzles = new List<Puzzle>();
         // TODO try use [SerializeField] for TextAsset for .txt
         string rawText = Resources.Load<TextAsset>("puzzles").text;
@@ -88,5 +88,7 @@ public class Puzzle
             Puzzle puzzle = new Puzzle(line);
             puzzles.Add(puzzle);
         }
+        selectedPuzzle = null;
+        submission = new List<string>();
     }
 }

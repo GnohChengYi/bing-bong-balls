@@ -25,16 +25,32 @@ public class GameManager : MonoBehaviour
 
     private List<float> audioDataList;
 
+    private AudioClip recordingClip;
+
     [SerializeField]
     private GameObject saveDialog;
 
-    private AudioClip recordingClip;
+    [SerializeField]
+    private GameObject scoreDialog;
+    private Text scoreText;
 
     private LeaderboardController leaderboard;
 
     // TODO fix screen orientation
     private void Start()
     {
+        if (Puzzle.selectedPuzzle == null)
+        {
+            mode = Mode.FREE_PLAY;
+            listenPuzzleButton.SetActive(false);
+        }
+        else
+        {
+            mode = Mode.PUZZLE;
+            listenPuzzleButton.SetActive(true);
+        }
+        operation = Operation.SELECT;
+        audioDataList = new List<float>();
         leaderboard = GetComponent<LeaderboardController>();
     }
 
@@ -51,26 +67,10 @@ public class GameManager : MonoBehaviour
         if (Instance == this) Instance = null;
     }
 
-    private void OnRenderObject()
-    {
-        if (Puzzle.selectedPuzzle == null)
-        {
-            mode = Mode.FREE_PLAY;
-            listenPuzzleButton.SetActive(false);
-        }
-        else
-        {
-            mode = Mode.PUZZLE;
-            listenPuzzleButton.SetActive(true);
-        }
-        operation = Operation.SELECT;
-        audioDataList = new List<float>();
-    }
-
     public void OnAudioFilterRead(float[] data, int channels)
     {
-        if (isRecording) audioDataList.AddRange(data);
-
+        if (isRecording && mode == Mode.FREE_PLAY)
+            audioDataList.AddRange(data);
     }
 
     public void ShowSaveDialog()
@@ -96,5 +96,22 @@ public class GameManager : MonoBehaviour
     public void CancelAudio()
     {
         audioDataList.Clear();
+    }
+
+    public void HandlePuzzleSubmission()
+    {
+        int score = Puzzle.selectedPuzzle.GetScore();
+        Debug.Log(String.Format("Score: {0}", score));
+        DisplayScore(score);
+        // TODO update personal highscore (integrate with leaderboard?)
+        // TODO upload to leaderboard
+    }
+
+    private void DisplayScore(int score)
+    {
+        scoreDialog.SetActive(true);
+        if (scoreText == null)
+            scoreText = scoreDialog.GetComponentInChildren<Text>();
+        scoreText.text = String.Format("Score: {0}", score);
     }
 }

@@ -51,7 +51,7 @@ public class Audio
 
     public static string lastSelectedInstrument = "Piano";
 
-    public static string lastSelectedNote = "a-3";
+    public static string lastSelectedNote = "a3";
 
     // instrument -> note -> clip
     private static Dictionary<string, Dictionary<string, AudioClip>>

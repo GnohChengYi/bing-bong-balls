@@ -22,6 +22,9 @@ public class Ball : MonoBehaviour
             AudioClip audioClip = Audio.GetClip(instrument, note);
             audioSource.clip = audioClip;
             audioSource.Play();
+            if (GameManager.Instance.mode == Mode.PUZZLE &&
+                GameManager.Instance.isRecording)
+                Puzzle.submission.Add(note);
         }
     }
 
@@ -29,7 +32,7 @@ public class Ball : MonoBehaviour
     {
         // TODO check all balls leave screen before wrapping up
         UpdateHighScore();
-        Destroy (gameObject);
+        Destroy(gameObject);
     }
 
     private void UpdateHighScore()

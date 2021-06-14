@@ -6,29 +6,36 @@ using UnityEngine.UI;
 
 public class RecordButtonScript : MonoBehaviour
 {
-    public Sprite RecordImg;
-    public Sprite StopImg;
-    // public Button button;
+    [SerializeField]
+    private Sprite RecordImg;
+    [SerializeField]
+    private Sprite StopImg;
+
+    private Image image;
+
+    private void Start()
+    {
+        image = gameObject.GetComponent<Image>();
+    }
 
     public void OnRecordingClick()
     {
         GameManager.Instance.operation = Operation.SELECT;
-
-        // TODO improve code if needed (e.g. use enum or change button image)
         if (!GameManager.Instance.isRecording)
         {
-            // button.image.overrideSprite = StopImg;
-            gameObject.GetComponent<Image>().overrideSprite = StopImg;
-            Debug.Log("not recording, record now");
+            image.overrideSprite = StopImg;
             GameManager.Instance.isRecording = true;
+            if (GameManager.Instance.mode == Mode.PUZZLE)
+                Puzzle.submission.Clear();
         }
         else
         {
-            // button.image.overrideSprite = RecordImg;
-            gameObject.GetComponent<Image>().overrideSprite = RecordImg;
-            Debug.Log("recording, stop now");
+            image.overrideSprite = RecordImg;
             GameManager.Instance.isRecording = false;
-            GameManager.Instance.ShowSaveDialog();
+            if (GameManager.Instance.mode == Mode.FREE_PLAY)
+                GameManager.Instance.ShowSaveDialog();
+            else if (GameManager.Instance.mode == Mode.PUZZLE)
+                GameManager.Instance.HandlePuzzleSubmission();
         }
     }
 }
