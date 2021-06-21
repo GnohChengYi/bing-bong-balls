@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public bool isRecording;
 
+    public bool isSharp;
+
     private List<float> audioDataList;
 
     private AudioClip recordingClip;
@@ -36,7 +38,6 @@ public class GameManager : MonoBehaviour
 
     private LeaderboardController leaderboard;
 
-    // TODO fix screen orientation
     private void Start()
     {
         if (Puzzle.selectedPuzzle == null)
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
         operation = Operation.SELECT;
         audioDataList = new List<float>();
         leaderboard = GetComponent<LeaderboardController>();
+        isSharp = false;
     }
 
     public static GameManager Instance { get; private set; }
