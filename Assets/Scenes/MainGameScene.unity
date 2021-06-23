@@ -3809,7 +3809,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 0b0a107a81ff3ee44bb8d4b20bcef441, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -4184,7 +4184,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 816.88495, y: -870.25}
+  m_AnchoredPosition: {x: 816.885, y: -870.25}
   m_SizeDelta: {x: 500, y: 1590}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &899597178
@@ -9264,6 +9264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guideTextObject: {fileID: 836873478}
+  guidesTextAsset: {fileID: 4900000, guid: a1c0a67c287847d42bcffaa4d7e909a2, type: 3}
 --- !u!114 &1984648608
 MonoBehaviour:
   m_ObjectHideFlags: 0

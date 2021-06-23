@@ -1,0 +1,29 @@
+Welcome to Bing Bong Balls!
+
+In this game, you use launchers to lauch balls.
+
+When balls and blocks collide, a musical note is played!
+
+There are 3 operations:
+- Create Launcher
+- Create Block
+- Select
+
+
+Click the "Create Laucher" button, then click any empty space to place a launcher.
+
+You can create blocks in the same way.
+
+
+After creating launchers/blocks, the operation becomes "Select".
+
+You can move or customize selected launchers/blocks.
+
+If a laucher is selected, you can touch any empty space to launch a ball.
+
+
+Use the recording button to record the notes played.
+
+In Free Play mode, you can choose to save the music.
+
+In Puzzle mode, stopping a recording automatically submits the recording.
