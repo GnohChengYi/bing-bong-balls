@@ -1,37 +1,47 @@
 {
+  "project_info": {
+    "project_number": "593066831984",
+    "firebase_url": "https://bing-bong-balls-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "bing-bong-balls",
+    "storage_bucket": "bing-bong-balls.appspot.com"
+  },
   "client": [
     {
-      "services": {
-        "appinvite_service": {
-          "status": 1
-        }, 
-        "analytics_service": {
-          "status": 0
-        }
-      }, 
-      "oauth_client": [
-        {
-          "client_id": "593066831984-qruqedcgv9ersakoj1r1n5m8oi22vh7o.apps.googleusercontent.com"
-        }
-      ], 
-      "api_key": [
-        {
-          "current_key": "AIzaSyAf4pB5UDXIvOJLn2GHf_AF383xrFAO14U"
-        }
-      ], 
       "client_info": {
-        "mobilesdk_app_id": "1:593066831984:ios:2797065031d26dd40204b5", 
+        "mobilesdk_app_id": "1:593066831984:android:553eb4a6616df74b0204b5",
         "android_client_info": {
           "package_name": "com.DefaultCompany.BingBongBalls"
         }
+      },
+      "oauth_client": [
+        {
+          "client_id": "593066831984-2oqmv4e1d7djkgkcqi58viqd5v8vgn1o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTbIiFDsKA3bUI2FoGOrWNWa_X5u60a7Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "593066831984-2oqmv4e1d7djkgkcqi58viqd5v8vgn1o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "593066831984-qruqedcgv9ersakoj1r1n5m8oi22vh7o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DefaultCompany.BingBongBalls"
+              }
+            }
+          ]
+        }
       }
     }
-  ], 
-  "configuration_version": "1", 
-  "project_info": {
-    "storage_bucket": "bing-bong-balls.appspot.com", 
-    "project_id": "bing-bong-balls", 
-    "firebase_url": "https://bing-bong-balls-default-rtdb.asia-southeast1.firebasedatabase.app", 
-    "project_number": "593066831984"
-  }
+  ],
+  "configuration_version": "1"
 }
