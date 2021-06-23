@@ -8,9 +8,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    // track whether guide is on in options
-    public static bool guideOn = true;
-
     public Mode mode;
 
     [SerializeField]
@@ -46,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (guideOn) guideDialog.SetActive(true);
+        if (GuideController.GetGuidePref()) guideDialog.SetActive(true);
         if (Puzzle.selectedPuzzle == null)
         {
             mode = Mode.FREE_PLAY;

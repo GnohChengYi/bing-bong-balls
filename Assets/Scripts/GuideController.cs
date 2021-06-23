@@ -6,6 +6,8 @@ using UnityEngine.UI;
 // TODO check guide quit guide again, verify guide progress correct
 public class GuideController : MonoBehaviour
 {
+    private static readonly string GUIDE_KEY = "guide";
+
     [SerializeField]
     private GameObject guideTextObject;
     private Text guideTextComponent;
@@ -53,5 +55,16 @@ public class GuideController : MonoBehaviour
                 Debug.Log("ERROR: invalid guideProgress");
                 break;
         }
+    }
+
+    public static bool GetGuidePref()
+    {
+        return PlayerPrefs.GetInt(GUIDE_KEY, 1) == 1;
+    }
+
+    public static void SetGuidePref(bool guideOn)
+    {
+        int pref = guideOn ? 1 : 0;
+        PlayerPrefs.SetInt(GUIDE_KEY, pref);
     }
 }
