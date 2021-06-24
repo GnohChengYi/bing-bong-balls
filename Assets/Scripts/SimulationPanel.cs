@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SimulationPanel : MonoBehaviour
 {
     [SerializeField]
-    private Camera camera;
+    private new Camera camera;
 
     [SerializeField]
     private GameObject launcherPrefab;
@@ -53,8 +53,6 @@ public class SimulationPanel : MonoBehaviour
                     block.name = Audio.lastSelectedNote;
                     string imgPath = "Blocks/" + block.name;
                     block.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(imgPath);
-                    // TODO Fix multiple notes during collision
-                    // TODO Fix sound being played when create block button is pressed
                 }
                 else if (GameManager.Instance.operation == Operation.SELECT)
                 {
