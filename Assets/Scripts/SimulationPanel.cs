@@ -89,7 +89,6 @@ public class SimulationPanel : MonoBehaviour
         GameObject newGameObject =
             Instantiate(gameObject, touchPos, Quaternion.identity, transform);
         newGameObject.transform.localScale *= scale;
-        GameManager.Instance.operation = Operation.SELECT;
         return newGameObject;
     }
 }
