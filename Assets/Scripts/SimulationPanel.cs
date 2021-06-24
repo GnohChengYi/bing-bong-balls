@@ -51,6 +51,10 @@ public class SimulationPanel : MonoBehaviour
                     GameObject block =
                         CreateAt(blockPrefab, touch) as GameObject;
                     block.name = Audio.lastSelectedNote;
+                    string imgPath = "Blocks/" + block.name;
+                    block.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(imgPath);
+                    // TODO Fix multiple notes during collision
+                    // TODO Fix sound being played when create block button is pressed
                 }
                 else if (GameManager.Instance.operation == Operation.SELECT)
                 {
