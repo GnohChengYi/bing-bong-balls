@@ -46,7 +46,8 @@ public class SimulationPanel : MonoBehaviour
                 if (currentElement != null && currentElement is Launcher)
                     currentElement.Select();
                 if (GameManager.Instance.operation == Operation.SELECT &&
-                    NothingInFront() && currentElement == null)
+                    !GameManager.Instance.HaveDialogInFront() &&
+                    currentElement == null)
                     AlertInvalidOperation();
             }
             else if (touch.phase == TouchPhase.Ended)
@@ -101,12 +102,6 @@ public class SimulationPanel : MonoBehaviour
             Instantiate(gameObject, touchPos, Quaternion.identity, transform);
         newGameObject.transform.localScale *= scale;
         return newGameObject;
-    }
-
-    private bool NothingInFront()
-    {
-        return !GameManager.Instance.guideDialog.activeSelf &&
-            !GameManager.Instance.saveDialog.activeSelf;
     }
 
     private void AlertInvalidOperation()

@@ -27,15 +27,18 @@ public class GameManager : MonoBehaviour
     private AudioClip recordingClip;
 
     [SerializeField]
-    public GameObject guideDialog;
+    private GameObject guideDialog;
 
     [SerializeField]
-    public GameObject saveDialog;
+    private GameObject saveDialog;
     private ToastCreator toastCreator;
 
     [SerializeField]
     private GameObject scoreDialog;
     private Text scoreText;
+
+    [SerializeField]
+    private GameObject exitDialog;
 
     // private LeaderboardController leaderboard;
 
@@ -117,5 +120,11 @@ public class GameManager : MonoBehaviour
         if (scoreText == null)
             scoreText = scoreDialog.GetComponentInChildren<Text>();
         scoreText.text = String.Format("Score: {0}", score);
+    }
+
+    public bool HaveDialogInFront()
+    {
+        return guideDialog.activeSelf || saveDialog.activeSelf ||
+            scoreDialog.activeSelf || exitDialog.activeSelf;
     }
 }
