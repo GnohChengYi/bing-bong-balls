@@ -2023,8 +2023,6 @@ MonoBehaviour:
   mode: 0
   listenPuzzleButton: {fileID: 1426330461}
   operation: 0
-  lastSelected: {fileID: 0}
-  launcher: {fileID: 0}
   isRecording: 0
   isSharp: 0
   guideDialog: {fileID: 1984648606}

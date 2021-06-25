@@ -15,11 +15,8 @@ public class GameManager : MonoBehaviour
 
     public Operation operation;
 
-    // auto deselect when click on Panel, so need to select back last selected Launcher or Block
-    public Selectable lastSelected;
-
-    // selected launcher, null when no launcher selected;
-    public Launcher launcher;
+    // holds reference to currently selected launcher or block, if any
+    public Element currentElement;
 
     public bool isRecording;
 

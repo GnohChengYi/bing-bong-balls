@@ -35,12 +35,13 @@ public class SimulationPanel : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
             if (!InPanel(touch)) return;
-            Launcher launcher = GameManager.Instance.launcher;
             if (touch.phase == TouchPhase.Began)
             {
-                // auto deselect when click on Panel, so need to select back last selected Launcher or Block
-                Selectable lastSelected = GameManager.Instance.lastSelected;
-                if (lastSelected) lastSelected.Select();
+                // auto deselect when click on Panel, so need to select back last selected Launcher
+                Element currentElement =
+                    GameManager.Instance.currentElement;
+                if (currentElement != null && currentElement is Launcher)
+                    currentElement.Select();
             }
             else if (touch.phase == TouchPhase.Ended)
             {
@@ -56,11 +57,17 @@ public class SimulationPanel : MonoBehaviour
                 }
                 else if (GameManager.Instance.operation == Operation.SELECT)
                 {
-                    if (!launcher) return;
-                    if (launcher.isActive)
+                    Element currentElement = GameManager.Instance.currentElement;
+                    if (currentElement == null)
+                        AlertInvalidOperation();
+                    else if (currentElement is Launcher)
                     {
-                        launcher.FacePointer();
-                        launcher.Launch();
+                        Launcher launcher = (Launcher)currentElement;
+                        if (launcher.isActive)
+                        {
+                            launcher.FacePointer();
+                            launcher.Launch();
+                        }
                     }
                 }
             }
@@ -90,5 +97,10 @@ public class SimulationPanel : MonoBehaviour
             Instantiate(gameObject, touchPos, Quaternion.identity, transform);
         newGameObject.transform.localScale *= scale;
         return newGameObject;
+    }
+
+    private void AlertInvalidOperation()
+    {
+        // TODO toast
     }
 }

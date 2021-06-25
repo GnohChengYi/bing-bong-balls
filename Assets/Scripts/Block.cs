@@ -4,20 +4,23 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Block : MonoBehaviour, ISelectHandler
+public class Block : MonoBehaviour, ISelectHandler, Element
 {
     private Selectable selectable;
 
     private void Start()
     {
         selectable = GetComponent<Selectable>();
+    }
+
+    public void Select()
+    {
         selectable.Select();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        GameManager.Instance.lastSelected = selectable;
-        GameManager.Instance.launcher = null;
+        GameManager.Instance.currentElement = this;
         // TODO change note
     }
 }

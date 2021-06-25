@@ -5,9 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class
-Launcher
-: MonoBehaviour, ISelectHandler, IDeselectHandler, IBeginDragHandler
+public class Launcher : MonoBehaviour, ISelectHandler,
+    IDeselectHandler, IBeginDragHandler, Element
 {
     [SerializeField]
     private GameObject ballPrefab;
@@ -23,22 +22,22 @@ Launcher
     private void Start()
     {
         selectable = GetComponent<Selectable>();
-        selectable.Select();
-        GameManager.Instance.lastSelected = selectable;
-        GameManager.Instance.launcher = this;
         instrument = Audio.lastSelectedInstrument;
+    }
+
+    public void Select()
+    {
+        selectable.Select();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        GameManager.Instance.lastSelected = selectable;
-        GameManager.Instance.launcher = this;
+        GameManager.Instance.currentElement = this;
         isActive = true;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        GameManager.Instance.launcher = null;
         isActive = false;
     }
 
