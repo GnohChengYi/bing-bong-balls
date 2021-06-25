@@ -32,20 +32,18 @@ public class GuideController : MonoBehaviour
     private void StartGuide()
     {
         guideProgress = 0;
-        Debug.Log(guideTextComponent);
-        Debug.Log(guideTexts);
         guideTextComponent.text = guideTexts[guideProgress];
     }
 
     public void ContinueGuide()
     {
-        Debug.Log("ContinueGuide");
         guideProgress++;
         if (guideProgress < guideTexts.Length)
             guideTextComponent.text = guideTexts[guideProgress];
         else gameObject.SetActive(false);
 
         // TODO add effects to toolbar (or even simulation panel) accordingly
+        /*
         switch (guideProgress)
         {
             case 1:
@@ -55,6 +53,7 @@ public class GuideController : MonoBehaviour
                 Debug.Log("ERROR: invalid guideProgress");
                 break;
         }
+        */
     }
 
     public static bool GetGuidePref()

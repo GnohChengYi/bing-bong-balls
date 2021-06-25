@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Block : MonoBehaviour, ISelectHandler, Element
+public class Block :
+    MonoBehaviour, ISelectHandler, IDeselectHandler, Element
 {
     private Selectable selectable;
 
@@ -22,5 +23,10 @@ public class Block : MonoBehaviour, ISelectHandler, Element
     {
         GameManager.Instance.currentElement = this;
         // TODO change note
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        GameManager.Instance.currentElement = null;
     }
 }

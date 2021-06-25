@@ -20,11 +20,14 @@ public class SimulationPanel : MonoBehaviour
 
     public float scale;
 
+    private ToastCreator toastCreator;
+
     // Start is called before the first frame update
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         scale = 0;
+        toastCreator = GetComponent<ToastCreator>();
     }
 
     // Update is called once per frame
@@ -42,6 +45,9 @@ public class SimulationPanel : MonoBehaviour
                     GameManager.Instance.currentElement;
                 if (currentElement != null && currentElement is Launcher)
                     currentElement.Select();
+                if (GameManager.Instance.operation == Operation.SELECT &&
+                    NothingInFront() && currentElement == null)
+                    AlertInvalidOperation();
             }
             else if (touch.phase == TouchPhase.Ended)
             {
@@ -58,9 +64,7 @@ public class SimulationPanel : MonoBehaviour
                 else if (GameManager.Instance.operation == Operation.SELECT)
                 {
                     Element currentElement = GameManager.Instance.currentElement;
-                    if (currentElement == null)
-                        AlertInvalidOperation();
-                    else if (currentElement is Launcher)
+                    if (currentElement is Launcher)
                     {
                         Launcher launcher = (Launcher)currentElement;
                         if (launcher.isActive)
@@ -99,8 +103,15 @@ public class SimulationPanel : MonoBehaviour
         return newGameObject;
     }
 
+    private bool NothingInFront()
+    {
+        return !GameManager.Instance.guideDialog.activeSelf &&
+            !GameManager.Instance.saveDialog.activeSelf;
+    }
+
     private void AlertInvalidOperation()
     {
-        // TODO toast
+        toastCreator.CreateToast(
+            "Please select a launcher or choose something to create");
     }
 }

@@ -27,10 +27,11 @@ public class GameManager : MonoBehaviour
     private AudioClip recordingClip;
 
     [SerializeField]
-    private GameObject guideDialog;
+    public GameObject guideDialog;
 
     [SerializeField]
-    private GameObject saveDialog;
+    public GameObject saveDialog;
+    private ToastCreator toastCreator;
 
     [SerializeField]
     private GameObject scoreDialog;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         }
         operation = Operation.SELECT;
         audioDataList = new List<float>();
+        toastCreator = GetComponent<ToastCreator>();
         // leaderboard = GetComponent<LeaderboardController>();
         isSharp = false;
     }
@@ -91,8 +93,7 @@ public class GameManager : MonoBehaviour
         int bitDepth = 16;
         int bitRate = frequency * bitDepth * channels;
         EncodeMP3.convert(recordingClip, filepath, bitRate);
-
-        // TODO show toast save directory
+        toastCreator.CreateToast("Saved to " + filepath);
         CancelAudio();
     }
 
