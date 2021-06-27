@@ -5,11 +5,11 @@ Enjoy the music that you created!
 
 
 ## Table of Contents
-[Installation](#installation)
-[Usage](#usage)
-[Contributing](#contributing)
-[Credits](#credits)
-[License](#license)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
 
 
 ## Installation
