@@ -196,8 +196,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: " [Free Play]\n\n - Create all the\n blocks & launchers\n you want!\n\n-
-    Record & save\n your music!\n\n - Your music will be\n saved here:\n\n /storage/emulated/0\n/Android/data/com.\nDefaultComplany.\n
-    BingBongBalls/files\n"
+    Record & save\n your music!\n\n - Your music will be\n saved here:\n\n /storage/emulated/0\n/Android/data/com.\nDefaultComplany.\nBingBongBalls/files\n"
 --- !u!222 &117724361
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -867,8 +866,8 @@ MonoBehaviour:
   - {fileID: 1248298653}
   - {fileID: 117724358}
   - {fileID: 1492979073}
+  - {fileID: 620005739}
   - {fileID: 266688176}
-  - {fileID: 0}
 --- !u!114 &587188466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,9 +1092,9 @@ MonoBehaviour:
   m_Text: " [Buttons]\n\n + Create Launcher\r +\n\n - After clicking this button,\nchoose
     your instrument\n then click the tick to confirm.\n\n - Now click any empty space
     to\n place a launcher!\n\n+ Create Block\r +\n\n - After clicking this button,\nchoose
-    a note & octave\n (click the button above the\n tick to decide if you want a\n
-    natural or a sharp)\n then click the tick to confirm.\n\n- Now click any empty
-    space\n to place a Block!"
+    a note & octave\n (click the button above the\n tick to decide if you want a\nnatural
+    or a sharp)\n then click the tick to confirm.\n\n- Now click any empty space\n
+    to place a Block!"
 --- !u!222 &620005743
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1851,8 +1850,8 @@ MonoBehaviour:
   - {fileID: 1248298653}
   - {fileID: 117724358}
   - {fileID: 1492979073}
+  - {fileID: 620005739}
   - {fileID: 266688176}
-  - {fileID: 0}
 --- !u!114 &831869704
 MonoBehaviour:
   m_ObjectHideFlags: 0
