@@ -5,59 +5,39 @@ using UnityEngine.UI;
 
 public class OctaveMenu : MonoBehaviour
 {
+    private void PlayNoteOnClick(char c) {
+        char[] cArray =  Audio.lastSelectedNote.ToCharArray();
+        cArray[cArray.Length - 1] = c;
+        Audio.lastSelectedNote = new string(cArray);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        AudioClip audioClip = Audio.GetClip(Audio.lastSelectedInstrument, Audio.lastSelectedNote);
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
+
     public void On2Click()
     {
-        // char[] cArray =  Audio.lastSelectedNote.ToCharArray();
-        // cArray[cArray.Length - 1] = '2';
-        // Audio.lastSelectedNote = new string(cArray);
-        // AudioSource audioSource = GetComponent<AudioSource>();
-        // AudioClip audioClip = Audio.GetClip("Piano", Audio.lastSelectedNote);
-        // audioSource.clip = audioClip;
-        // audioSource.Play();
+        PlayNoteOnClick('2');
     }
 
     public void On3Click()
     {
-        char[] cArray =  Audio.lastSelectedNote.ToCharArray();
-        cArray[cArray.Length - 1] = '3';
-        Audio.lastSelectedNote = new string(cArray);
-        AudioSource audioSource = GetComponent<AudioSource>();
-        AudioClip audioClip = Audio.GetClip("Piano", Audio.lastSelectedNote);
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        PlayNoteOnClick('3');
     }
 
     public void On4Click()
     {
-        char[] cArray =  Audio.lastSelectedNote.ToCharArray();
-        cArray[cArray.Length - 1] = '4';
-        Audio.lastSelectedNote = new string(cArray);
-        AudioSource audioSource = GetComponent<AudioSource>();
-        AudioClip audioClip = Audio.GetClip("Piano", Audio.lastSelectedNote);
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        PlayNoteOnClick('4');
     }
 
     public void On5Click()
     {
-        char[] cArray =  Audio.lastSelectedNote.ToCharArray();
-        cArray[cArray.Length - 1] = '5';
-        Audio.lastSelectedNote = new string(cArray);
-        AudioSource audioSource = GetComponent<AudioSource>();
-        AudioClip audioClip = Audio.GetClip("Piano", Audio.lastSelectedNote);
-        audioSource.clip = audioClip;
-        audioSource.Play();
+        PlayNoteOnClick('5');
     }
 
     public void On6Click()
     {
-        // char[] cArray =  Audio.lastSelectedNote.ToCharArray();
-        // cArray[cArray.Length - 1] = '6';
-        // Audio.lastSelectedNote = new string(cArray);
-        // AudioSource audioSource = GetComponent<AudioSource>();
-        // AudioClip audioClip = Audio.GetClip("Piano", Audio.lastSelectedNote);
-        // audioSource.clip = audioClip;
-        // audioSource.Play();
+        PlayNoteOnClick('6');
     }
 
      public void OnSharpClick()
@@ -68,20 +48,14 @@ public class OctaveMenu : MonoBehaviour
             char [] charArray = { cArray[0], '-', cArray[1] };
             Audio.lastSelectedNote = new string(charArray);
             GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Buttons/Sharp");
-            AudioSource audioSource = GetComponent<AudioSource>();
-            AudioClip audioClip = Audio.GetClip("Piano", Audio.lastSelectedNote);
-            audioSource.clip = audioClip;
-            audioSource.Play();
+            PlayNoteOnClick(Audio.lastSelectedNote[Audio.lastSelectedNote.Length - 1]);
         }
         else
         {
             char [] charArray2 = { cArray[0], cArray[2] };
             Audio.lastSelectedNote = new string(charArray2);
             GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Buttons/Natural");
-            AudioSource audioSource = GetComponent<AudioSource>();
-            AudioClip audioClip = Audio.GetClip("Piano", Audio.lastSelectedNote);
-            audioSource.clip = audioClip;
-            audioSource.Play();
+            PlayNoteOnClick(Audio.lastSelectedNote[Audio.lastSelectedNote.Length - 1]);
         }
     }
 }

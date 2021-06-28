@@ -5,48 +5,76 @@ using UnityEngine;
 public class Audio
 {
     // TODO make sure complete and filenames match these
-    public static string[] instruments = new string[] { "Piano" };
+    public static string[]
+        instruments =
+            new string[] {
+                "Piano",
+                "Acoustic Guitar"
+            };
 
     private static string[]
         notes =
             new string[] {
+                "a-2",
                 "a-3",
                 "a-4",
                 "a-5",
+                "a-6",
+                "a2",
                 "a3",
                 "a4",
                 "a5",
+                "a6",
+                "b2",
                 "b3",
                 "b4",
                 "b5",
+                "b6",
+                "c-2",
                 "c-3",
                 "c-4",
                 "c-5",
+                "c-6",
+                "c2",
                 "c3",
                 "c4",
                 "c5",
                 "c6",
+                "d-2",
                 "d-3",
                 "d-4",
                 "d-5",
+                "d-6",
+                "d2",
                 "d3",
                 "d4",
                 "d5",
+                "d6",
+                "e2",
                 "e3",
                 "e4",
                 "e5",
+                "e6",
+                "f-2",
                 "f-3",
                 "f-4",
                 "f-5",
+                "f-6",
+                "f2",
                 "f3",
                 "f4",
                 "f5",
+                "f6",
+                "g-2",
                 "g-3",
                 "g-4",
                 "g-5",
+                "g-6",
+                "g2",
                 "g3",
                 "g4",
-                "g5"
+                "g5",
+                "g6"
             };
 
     public static string lastSelectedInstrument = "Piano";

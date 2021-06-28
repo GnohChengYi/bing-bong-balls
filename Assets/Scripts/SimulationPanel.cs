@@ -53,7 +53,14 @@ public class SimulationPanel : MonoBehaviour
             else if (touch.phase == TouchPhase.Ended)
             {
                 if (GameManager.Instance.operation == Operation.CREATE_LAUNCHER)
-                    CreateAt(launcherPrefab, touch);
+                {
+                    GameObject currLauncher = 
+                        CreateAt(launcherPrefab, touch);
+                    currLauncher.name = Audio.lastSelectedInstrument;
+                    string launcherPath = "Launchers/" + currLauncher.name;
+                    currLauncher.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(launcherPath);
+                    GameManager.Instance.operation = Operation.SELECT;
+                }    
                 else if (GameManager.Instance.operation == Operation.CREATE_BLOCK)
                 {
                     GameObject block =

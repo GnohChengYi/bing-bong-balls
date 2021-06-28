@@ -6,11 +6,11 @@ public class LauncherMenu : MonoBehaviour
 {
     public void OnPianoClick()
     {
-
+        Audio.lastSelectedInstrument = "Piano";
     }
 
     public void OnGuitarClick()
     {
-        
+        Audio.lastSelectedInstrument = "Acoustic Guitar";
     }
 }

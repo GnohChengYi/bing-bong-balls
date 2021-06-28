@@ -13,8 +13,6 @@ public class Launcher : MonoBehaviour, ISelectHandler,
 
     private float speed = 3.0F;
 
-    public string instrument;
-
     private Selectable selectable;
 
     public bool isActive = true;
@@ -22,7 +20,6 @@ public class Launcher : MonoBehaviour, ISelectHandler,
     private void Start()
     {
         selectable = GetComponent<Selectable>();
-        instrument = Audio.lastSelectedInstrument;
     }
 
     public void Select()
@@ -33,6 +30,7 @@ public class Launcher : MonoBehaviour, ISelectHandler,
     public void OnSelect(BaseEventData eventData)
     {
         GameManager.Instance.currentElement = this;
+        Audio.lastSelectedInstrument = name;
         isActive = true;
     }
 
@@ -60,6 +58,8 @@ public class Launcher : MonoBehaviour, ISelectHandler,
         ball.transform.position = transform.position + transform.up;
         ball.transform.rotation = transform.rotation;
         ball.GetComponent<Rigidbody2D>().velocity = transform.up * speed;
-        ball.name = instrument;
+        // TODO Change Ball Sprite (Still not working)
+        string ballPath = "Balls/" + name;
+        ball.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(ballPath);
     }
 }
