@@ -30,6 +30,8 @@ Check out this repository again in the future!
 - Listen to a recording & recreate it using your creativity
 - Submit your recording & check the leaderboard to compare your scores!
 
+![Main Game](https://drive.google.com/uc?export=view&id=1E8SvoG-Q86A7gw-iTnzwrCzTf-mBCYkZ)
+
 ### Buttons
 #### Create Launcher
 - After clicking this button, choose your instrument then click the tick to confirm
