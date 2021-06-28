@@ -18,7 +18,7 @@ public class HowtoButtons : MonoBehaviour
     
     void Start()
     {
-        page = 1;
+        page = 0;
         pages[0].SetActive(true);
         pages[1].SetActive(false);
         pages[2].SetActive(false);
@@ -33,8 +33,8 @@ public class HowtoButtons : MonoBehaviour
         pages[page].SetActive(false);
         page--;
         pages[page].SetActive(true);
-        if (page == 1) previous.SetActive(false);
-        if (page == 4) next.SetActive(true);
+        if (page == 0) previous.SetActive(false);
+        if (page == 3) next.SetActive(true);
     }
 
     public void NextButton()
@@ -42,7 +42,7 @@ public class HowtoButtons : MonoBehaviour
         pages[page].SetActive(false);
         page++;
         pages[page].SetActive(true);
-        if (page == 5) next.SetActive(false);
-        if (page == 2) previous.SetActive(true);
+        if (page == 4) next.SetActive(false);
+        if (page == 1) previous.SetActive(true);
     }
 }
