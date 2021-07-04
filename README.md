@@ -63,7 +63,7 @@ Check out this repository again in the future!
 ## Credits
 Main contributors: [Gnoh Cheng Yi](https://github.com/GnohChengYi/), [Gabriel Matienzo](https://github.com/GabrielWLM)
 
-Evaluators: Shah Neil Apoorva, CrwonKnight, NUS Clubhouse, PlaneLife
+Evaluators: Shah Neil Apoorva, CrownKnight, NUS Clubhouse, PlaneLife
 
 
 ## License
