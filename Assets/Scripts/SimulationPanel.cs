@@ -8,9 +8,6 @@ using UnityEngine.UI;
 public class SimulationPanel : MonoBehaviour
 {
     [SerializeField]
-    private new Camera camera;
-
-    [SerializeField]
     private GameObject launcherPrefab;
 
     [SerializeField]
@@ -54,17 +51,15 @@ public class SimulationPanel : MonoBehaviour
             {
                 if (GameManager.Instance.operation == Operation.CREATE_LAUNCHER)
                 {
-                    GameObject currLauncher = 
-                        CreateAt(launcherPrefab, touch);
+                    GameObject currLauncher = CreateAt(launcherPrefab, touch);
                     currLauncher.name = Audio.lastSelectedInstrument;
                     string launcherPath = "Launchers/" + currLauncher.name;
                     currLauncher.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(launcherPath);
                     GameManager.Instance.operation = Operation.SELECT;
-                }    
+                }
                 else if (GameManager.Instance.operation == Operation.CREATE_BLOCK)
                 {
-                    GameObject block =
-                        CreateAt(blockPrefab, touch) as GameObject;
+                    GameObject block = CreateAt(blockPrefab, touch);
                     block.name = Audio.lastSelectedNote;
                     string imgPath = "Blocks/" + block.name;
                     block.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(imgPath);
@@ -98,7 +93,7 @@ public class SimulationPanel : MonoBehaviour
         return RectTransformUtility
             .RectangleContainsScreenPoint(rectTransform,
             touch.position,
-            camera);
+            Camera.main);
     }
 
     // TODO create at same z as panel
