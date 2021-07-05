@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     private GameObject exitDialog;
 
     // private LeaderboardController leaderboard;
+    public string debugMessage;
 
     private void Start()
     {

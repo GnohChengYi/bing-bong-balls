@@ -2248,6 +2248,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2354,6 +2355,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toastPrefab: {fileID: 7950151708911818044, guid: d750b48094139bc40a28536bf6f1ad09, type: 3}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ca0e434988ffd489ecb73af741a61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &529483597
 GameObject:
   m_ObjectHideFlags: 0
@@ -8974,7 +8987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b54ad4ba5bff964eb2eed911037f369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 519420031}
   launcherPrefab: {fileID: 5175876598057331519, guid: 1976aa02a653a4d4893db77476c5a7d0, type: 3}
   blockPrefab: {fileID: 7972078747714473479, guid: f154997c43ea746429adb242b30a5711, type: 3}
   scale: 0

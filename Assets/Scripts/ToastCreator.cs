@@ -10,6 +10,7 @@ public class ToastCreator : MonoBehaviour
 
     public void CreateToast(string message)
     {
+        Debug.Log("CreateToast: " + message);
         GameObject newToast = (GameObject)Instantiate(toastPrefab);
         Text toastTextComponent = newToast.GetComponentInChildren<Text>();
         toastTextComponent.text = message;

@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PuzzleMenu.unity
     guid: 2dd1ef8f1337ac2499cfb6cd223c2b85
-  m_configObjects: {}
+  m_configObjects:
+    UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 1fd7fa472e10714468c10653056ca83a, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c27c46f90c8330147a36752853e0c502, type: 2}
