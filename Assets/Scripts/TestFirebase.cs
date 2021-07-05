@@ -14,7 +14,6 @@ public class TestFirebase : MonoBehaviour
     private bool testDone;
 
     private ToastCreator toastCreator;
-    private string debugMessage;
 
     private void Start()
     {
@@ -30,7 +29,6 @@ public class TestFirebase : MonoBehaviour
                 // Set a flag here to indicate whether Firebase is ready to use by your app
                 firebaseReady = true;
 
-                // TODO remove after debug
                 TestAuth();
             }
             else
@@ -58,7 +56,6 @@ public class TestFirebase : MonoBehaviour
     private void TestAuth()
     {
         Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.GetAuth(app);
-        GameManager.Instance.debugMessage = String.Format("auth: {0}", auth);
         string testEmail = "test@gmail.com";
         string testPassword = "password";
         auth.CreateUserWithEmailAndPasswordAsync(testEmail, testPassword).ContinueWith(task =>
@@ -67,22 +64,18 @@ public class TestFirebase : MonoBehaviour
             {
                 string error = "CreateUserWithEmailAndPasswordAsync was canceled.";
                 Debug.LogError(error);
-                GameManager.Instance.debugMessage = error;
                 return;
             }
             if (task.IsFaulted)
             {
                 string error = "CreateUserWithEmailAndPasswordAsync encountered an error: " + task.Exception;
                 Debug.LogError(error);
-                GameManager.Instance.debugMessage = task.Exception.ToString();
                 return;
             }
             Firebase.Auth.FirebaseUser newUser = task.Result;
             string message = String.Format(
                 "Firebase user created successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
-            GameManager.Instance.debugMessage = message;
-            debugMessage = message;
         });
     }
 }
