@@ -62,8 +62,7 @@ public class TestFirebase : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                string error = "CreateUserWithEmailAndPasswordAsync was canceled.";
-                Debug.LogError(error);
+                Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
                 return;
             }
             if (task.IsFaulted)
@@ -76,6 +75,7 @@ public class TestFirebase : MonoBehaviour
             string message = String.Format(
                 "Firebase user created successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
+            Debug.Log(message);
         });
     }
 }
