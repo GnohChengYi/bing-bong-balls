@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -43,35 +44,35 @@ public class RegisterDialog : MonoBehaviour
         string name = nameField.text;
         string password = passwordField.text;
         string confirmPassword = confirmPasswordField.text;
+        if (NoSimpleError(email, name, password, confirmPassword))
+            AccountManager.Instance.IsExistingAccount(email).ContinueWith(task =>
+                {
+                    bool isExistingAccount = task.Result;
+                    if (isExistingAccount) alertExistingAccount = true;
+                    else
+                        AccountManager.Instance.Register(email, name, password)
+                            .ContinueWith(task =>
+                                {
+                                    bool success = task.Result;
+                                    Debug.LogFormat("Register success: {0}", success);
+                                    if (success) shouldActive = false;
+                                });
+                });
+    }
+
+    private bool NoSimpleError(
+        string email, string name, string password, string confirmPassword)
+    {
         if (!regex.IsMatch(email))
-        {
             toastCreator.CreateToast("Invalid email format!");
-            return;
-        }
-        if (password != confirmPassword)
-        {
+        else if (String.IsNullOrWhiteSpace(name))
+            toastCreator.CreateToast("Invalid name!");
+        else if (password != confirmPassword)
             toastCreator.CreateToast("Passwords must be the same!");
-            return;
-        }
-        if (password.Length < 6)
-        {
+        else if (password.Length < 6)
             toastCreator.CreateToast("Password must be at least 6 characters!");
-            return;
-        }
-        AccountManager.Instance.IsExistingAccount(email).ContinueWith(task =>
-            {
-                bool isExistingAccount = task.Result;
-                if (isExistingAccount) alertExistingAccount = true;
-                else
-                    AccountManager.Instance.Register(email, name, password)
-                        .ContinueWith(task =>
-                            {
-                                bool success = task.Result;
-                                Debug.LogFormat("Register success: {0}", success);
-                                if (success) shouldActive = false;
-                            }
-                        );
-            }
-        );
+        else
+            return true;
+        return false;
     }
 }

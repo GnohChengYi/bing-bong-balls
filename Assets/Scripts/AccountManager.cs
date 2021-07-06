@@ -108,26 +108,52 @@ public class AccountManager : MonoBehaviour
     {
         Debug.Log("Registering");
         FirebaseUser newUser = null;
-        await auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWith(task =>
-        {
-            if (task.IsCanceled)
-                Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
-            else if (task.IsFaulted)
-                Debug.LogError(String.Format(
-                    "CreateUserWithEmailAndPasswordAsync encountered an error: {0}",
-                    task.Exception));
-            else
-            {
-                newUser = task.Result;
-                UserProfile profile = new UserProfile();
-                profile.DisplayName = name;
-                newUser.UpdateUserProfileAsync(profile);
-                Debug.LogFormat("Firebase user created successfully: {0} ({1})",
-                        newUser.DisplayName, newUser.UserId);
-                welcomeUser = true;
-            }
-        });
+        await auth.CreateUserWithEmailAndPasswordAsync(email, password)
+            .ContinueWith(task =>
+                {
+                    if (task.IsCanceled)
+                        Debug.LogError("CreateUserWithEmailAndPasswordAsync was canceled.");
+                    else if (task.IsFaulted)
+                        Debug.LogErrorFormat(
+                            "CreateUserWithEmailAndPasswordAsync encountered an error: {0}",
+                            task.Exception);
+                    else
+                    {
+                        newUser = task.Result;
+                        UserProfile profile = new UserProfile();
+                        profile.DisplayName = name;
+                        newUser.UpdateUserProfileAsync(profile);
+                        Debug.LogFormat("Firebase user created successfully: {0} ({1})",
+                            newUser.DisplayName, newUser.UserId);
+                        welcomeUser = true;
+                    }
+                });
         return newUser != null;
+    }
+
+    public async Task<bool> Login(string email, string password)
+    {
+        Debug.Log("Attempting login");
+        FirebaseUser user = null;
+        await auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(
+            task =>
+            {
+                if (task.IsCanceled)
+                    Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                else if (task.IsFaulted)
+                    Debug.LogErrorFormat(
+                        "SignInWithEmailAndPasswordAsync encountered an error : {0}",
+                        task.Exception);
+                else
+                {
+                    user = task.Result;
+                    Debug.LogFormat("Signed In successfully: {0}, ({1})",
+                        user.DisplayName, user.UserId);
+                    welcomeUser = true;
+                }
+            }
+        );
+        return user != null;
     }
 
     public void WelcomeUser()
