@@ -3423,7 +3423,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Login
+  m_Text: Sign In
 --- !u!222 &871794572
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4669,7 +4669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 358e19ede46b37e49be8bc5a6976840c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loginDialog: {fileID: 1276183005}
+  signInDialog: {fileID: 1276183005}
   toastCreator: {fileID: 1101487524}
 --- !u!114 &1101487524
 MonoBehaviour:
@@ -5747,7 +5747,7 @@ GameObject:
   - component: {fileID: 1276183010}
   - component: {fileID: 1276183011}
   m_Layer: 5
-  m_Name: LoginDialog
+  m_Name: SignInDialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7663,7 +7663,7 @@ GameObject:
   - component: {fileID: 1800765274}
   - component: {fileID: 1800765277}
   m_Layer: 5
-  m_Name: LoginButton
+  m_Name: SignInButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7734,8 +7734,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1276183010}
-        m_TargetAssemblyTypeName: LoginDialog, Assembly-CSharp
-        m_MethodName: OnLoginClick
+        m_TargetAssemblyTypeName: SignInDialog, Assembly-CSharp
+        m_MethodName: OnSignInClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

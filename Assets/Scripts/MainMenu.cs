@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         // TODO remove after debug
-        AccountManager.Instance.auth.SignOut();
+        AccountManager.Instance.SignOut();
 
         Application.Quit();
     }

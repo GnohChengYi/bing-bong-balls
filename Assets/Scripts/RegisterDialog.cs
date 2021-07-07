@@ -50,7 +50,7 @@ public class RegisterDialog : MonoBehaviour
                     bool isExistingAccount = task.Result;
                     if (isExistingAccount) alertExistingAccount = true;
                     else
-                        AccountManager.Instance.Register(email, name, password)
+                        AccountManager.Register(email, name, password)
                             .ContinueWith(task =>
                                 {
                                     bool success = task.Result;

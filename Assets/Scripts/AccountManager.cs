@@ -1,5 +1,6 @@
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,16 +10,19 @@ using UnityEngine;
 
 // TODO handle no internet situation
 // TODO add forgot password function
+// TODO log out button
+// TODO visitor mode (currently, must log in to play)
 public class AccountManager : MonoBehaviour
 {
-    private FirebaseApp app;
-    public FirebaseAuth auth;
+    private static FirebaseApp app;
+    private static FirebaseAuth auth;
+    private static FirebaseDatabase database;
     private static bool firebaseReady;
     private static bool firstTimeStartMenu = true;
-    private bool welcomeUser;
+    private static bool welcomeUser;
 
     [SerializeField]
-    private GameObject loginDialog;
+    private GameObject signInDialog;
     [SerializeField]
     private ToastCreator toastCreator;
 
@@ -73,18 +77,15 @@ public class AccountManager : MonoBehaviour
 
     private void SetUpFirebase()
     {
-        Debug.Log("SetUpFirebase");
         app = FirebaseApp.DefaultInstance;
         auth = FirebaseAuth.GetAuth(app);
         auth.StateChanged += AuthStateChanged;
+        database = FirebaseDatabase.GetInstance(app);
     }
 
     private void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
-        Debug.Log("AuthStateChanged");
-        if (auth.CurrentUser != null)
-            Debug.LogFormat("auth.CurrentUser: {0}", auth.CurrentUser.Email);
-        else loginDialog.SetActive(true);
+        if (auth.CurrentUser == null) signInDialog.SetActive(true);
     }
 
     public async Task<bool> IsExistingAccount(string email)
@@ -93,20 +94,16 @@ public class AccountManager : MonoBehaviour
         await auth.FetchProvidersForEmailAsync(email).ContinueWith((authTask) =>
             {
                 if (authTask.IsCanceled) Debug.Log("Provider fetch canceled.");
-                else if (authTask.IsFaulted)
-                {
-                    Debug.Log("Provider fetch encountered an error.");
-                    Debug.Log(authTask.Exception.ToString());
-                }
+                else if (authTask.IsFaulted) Debug.LogErrorFormat(
+                    "Provider fetch encountered an error: {0}", authTask.Exception);
                 else if (authTask.IsCompleted) providers = authTask.Result;
             }
         );
         return providers != null && providers.Any<string>();
     }
 
-    public async Task<bool> Register(string email, string name, string password)
+    public static async Task<bool> Register(string email, string name, string password)
     {
-        Debug.Log("Registering");
         FirebaseUser newUser = null;
         await auth.CreateUserWithEmailAndPasswordAsync(email, password)
             .ContinueWith(task =>
@@ -131,9 +128,8 @@ public class AccountManager : MonoBehaviour
         return newUser != null;
     }
 
-    public async Task<bool> Login(string email, string password)
+    public static async Task<bool> SignIn(string email, string password)
     {
-        Debug.Log("Attempting login");
         FirebaseUser user = null;
         await auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(
             task =>
@@ -163,4 +159,53 @@ public class AccountManager : MonoBehaviour
         else welcomeUser = true;
     }
 
+    public static async Task<long?> GetUserHighScore(string puzzle)
+    {
+        if (!SignedIn()) return Int32.MaxValue;
+        string path = GetUserHighScorePath(puzzle);
+        long? highScore = null;
+        await database.GetReference(path).GetValueAsync().ContinueWith(task =>
+        {
+            if (task.IsFaulted) Debug.LogErrorFormat(
+                "GetValueAsync encountered an error: {0}", task.Exception);
+            else if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                if (snapshot.Exists) highScore = (long?)snapshot.Value;
+                else Debug.Log("snapshot does not exists");
+            }
+        });
+        // null means no existing high score
+        return highScore;
+    }
+
+    // updates user high score and global high score (if required)
+    public static async void UpdateHighScore(string puzzle, int highScore)
+    {
+        Debug.Log("AccountManager::UpdateHighScore");
+        string userPath = GetUserHighScorePath(puzzle);
+        await database.GetReference(userPath).SetValueAsync(highScore)
+            .ContinueWith(task =>
+            {
+                if (task.IsFaulted) Debug.LogErrorFormat(
+                    "SetValueAsync encountered an error: {0}", task.Exception);
+                else if (task.IsCompleted) Debug.Log("SetValueAsync completed");
+            });
+        // TODO update global high score if required
+    }
+
+    public static bool SignedIn()
+    {
+        return auth.CurrentUser != null;
+    }
+
+    public void SignOut()
+    {
+        auth.SignOut();
+    }
+
+    private static string GetUserHighScorePath(string puzzle)
+    {
+        return "users/" + auth.CurrentUser.UserId + "/high-scores/" + puzzle;
+    }
 }

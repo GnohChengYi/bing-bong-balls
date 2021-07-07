@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoginDialog : MonoBehaviour
+public class SignInDialog : MonoBehaviour
 {
     private bool shouldActive;
     private bool alertError;
@@ -28,11 +28,11 @@ public class LoginDialog : MonoBehaviour
         }
     }
 
-    public void OnLoginClick()
+    public void OnSignInClick()
     {
         string email = emailField.text;
         string password = passwordField.text;
-        AccountManager.Instance.Login(email, password).ContinueWith(task => {
+        AccountManager.SignIn(email, password).ContinueWith(task => {
             bool success = task.Result;
             if (success) shouldActive = false;
             else alertError = true;

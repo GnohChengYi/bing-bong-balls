@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-// using Firebase.Leaderboard;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,11 +36,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject scoreDialog;
     private Text scoreText;
+    private bool showNewHighScore;
+    private bool savePlayerPrefHighScore;
+    private int score;
 
     [SerializeField]
     private GameObject exitDialog;
-
-    // private LeaderboardController leaderboard;
 
     private void Start()
     {
@@ -58,8 +59,22 @@ public class GameManager : MonoBehaviour
         operation = Operation.SELECT;
         audioDataList = new List<float>();
         toastCreator = GetComponent<ToastCreator>();
-        // leaderboard = GetComponent<LeaderboardController>();
         isSharp = false;
+    }
+
+    private void Update()
+    {
+        if (showNewHighScore)
+        {
+            showNewHighScore = false;
+            toastCreator.CreateToast("New Highscore!");
+        }
+        if (savePlayerPrefHighScore)
+        {
+            savePlayerPrefHighScore = false;
+            PlayerPrefs.SetInt(Puzzle.selectedPuzzle.title, score);
+            PlayerPrefs.Save();
+        }
     }
 
     public static GameManager Instance { get; private set; }
@@ -107,19 +122,49 @@ public class GameManager : MonoBehaviour
 
     public void HandlePuzzleSubmission()
     {
-        int score = Puzzle.selectedPuzzle.GetScore();
+        Puzzle puzzle = Puzzle.selectedPuzzle;
+        score = puzzle.GetScore();
         Debug.Log(String.Format("Score: {0}", score));
-        DisplayScore(score);
-        // TODO update personal highscore (integrate with leaderboard?)
-        // TODO upload to leaderboard
+        DisplayScore();
+        IsNewHighScore().ContinueWith(task =>
+        {
+            bool isNewHighScore = task.Result;
+            showNewHighScore = isNewHighScore;
+            if (isNewHighScore)
+            {
+                savePlayerPrefHighScore = true;
+                if (AccountManager.SignedIn())
+                    AccountManager.UpdateHighScore(puzzle.title, score);
+            }
+        });
     }
 
-    private void DisplayScore(int score)
+    private void DisplayScore()
     {
         scoreDialog.SetActive(true);
         if (scoreText == null)
             scoreText = scoreDialog.GetComponentInChildren<Text>();
         scoreText.text = String.Format("Score: {0}", score);
+    }
+
+    private async Task<bool> IsNewHighScore()
+    {
+        string puzzle = Puzzle.selectedPuzzle.title;
+        long? highScore = null;
+        // check PlayerPrefs first to minimize query from Firebase
+        if (PlayerPrefs.HasKey(puzzle)) highScore = PlayerPrefs.GetInt(puzzle);
+        else if (AccountManager.SignedIn())
+        {
+            await AccountManager.GetUserHighScore(puzzle).ContinueWith(task =>
+            {
+                if (task.IsFaulted) Debug.LogErrorFormat(
+                    "GetUserHighScore encountered an error: {0}", task.Exception);
+                else if (task.IsCompleted) highScore = task.Result;
+            });
+        }
+        else Debug.Log("No locally saved high score. Not signed in");
+        // highScore==null => no high score yet => is new high score
+        return highScore == null || score > highScore;
     }
 
     public bool HaveDialogInFront()
