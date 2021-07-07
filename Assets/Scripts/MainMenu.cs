@@ -20,6 +20,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    public void ShowHighScores()
+    {
+        SceneManager.LoadScene(3);
+    }
+
     public void QuitGame()
     {
         // TODO remove after debug
