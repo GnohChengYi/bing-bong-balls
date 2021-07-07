@@ -72,7 +72,8 @@ public class GameManager : MonoBehaviour
         if (savePlayerPrefHighScore)
         {
             savePlayerPrefHighScore = false;
-            PlayerPrefs.SetInt(Puzzle.selectedPuzzle.title, score);
+            string key = Puzzle.selectedPuzzle.title + AccountManager.GetUserId();
+            PlayerPrefs.SetInt(key, score);
             PlayerPrefs.Save();
         }
     }
@@ -149,10 +150,12 @@ public class GameManager : MonoBehaviour
 
     private async Task<bool> IsNewHighScore()
     {
+        Debug.Log("GameManager::IsNewHighScore");
         string puzzle = Puzzle.selectedPuzzle.title;
         long? highScore = null;
         // check PlayerPrefs first to minimize query from Firebase
-        if (PlayerPrefs.HasKey(puzzle)) highScore = PlayerPrefs.GetInt(puzzle);
+        string key = puzzle + AccountManager.GetUserId();
+        if (PlayerPrefs.HasKey(key)) highScore = PlayerPrefs.GetInt(key);
         else if (AccountManager.SignedIn())
         {
             await AccountManager.GetUserHighScore(puzzle).ContinueWith(task =>

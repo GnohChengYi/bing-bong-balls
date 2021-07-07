@@ -16,7 +16,7 @@ public class AccountManager : MonoBehaviour
 {
     private static FirebaseApp app;
     private static FirebaseAuth auth;
-    private static FirebaseDatabase database;
+    public static FirebaseDatabase database;
     private static bool firebaseReady;
     private static bool firstTimeStartMenu = true;
     private static bool welcomeUser;
@@ -45,7 +45,6 @@ public class AccountManager : MonoBehaviour
         else SetUpFirebase();
     }
 
-    // TODO check leave Start Menu then enter again
     private void Update()
     {
         if (firebaseReady && firstTimeStartMenu)
@@ -189,9 +188,25 @@ public class AccountManager : MonoBehaviour
             {
                 if (task.IsFaulted) Debug.LogErrorFormat(
                     "SetValueAsync encountered an error: {0}", task.Exception);
-                else if (task.IsCompleted) Debug.Log("SetValueAsync completed");
+                else if (task.IsCompleted)
+                    Debug.Log("Updated user high score on Firebase");
             });
-        // TODO update global high score if required
+        await GlobalHighScoresManager.GetHighScores(puzzle).ContinueWith(task =>
+        {
+            if (task.IsFaulted) Debug.LogErrorFormat(
+                "GetHighScores encountered an error: {0}", task.Exception);
+            else if (task.IsCompleted)
+            {
+                List<UserScore> highScores = task.Result;
+                if (ShouldSubmitToGlobalHighScore(highScore, highScores))
+                    GlobalHighScoresManager.AddHighScore(puzzle, GetUserId(), highScore);
+            }
+        });
+    }
+
+    public static string GetUserId()
+    {
+        return auth.CurrentUser.UserId;
     }
 
     public static bool SignedIn()
@@ -207,5 +222,12 @@ public class AccountManager : MonoBehaviour
     private static string GetUserHighScorePath(string puzzle)
     {
         return "users/" + auth.CurrentUser.UserId + "/high-scores/" + puzzle;
+    }
+
+    private static bool ShouldSubmitToGlobalHighScore(
+        int highScore, List<UserScore> highScores)
+    {
+        if (highScores.Count < GlobalHighScoresManager.limit) return true;
+        return highScore > highScores[highScores.Count - 1].score;
     }
 }

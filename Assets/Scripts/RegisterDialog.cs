@@ -46,18 +46,17 @@ public class RegisterDialog : MonoBehaviour
         string confirmPassword = confirmPasswordField.text;
         if (NoSimpleError(email, name, password, confirmPassword))
             AccountManager.Instance.IsExistingAccount(email).ContinueWith(task =>
-                {
-                    bool isExistingAccount = task.Result;
-                    if (isExistingAccount) alertExistingAccount = true;
-                    else
-                        AccountManager.Register(email, name, password)
-                            .ContinueWith(task =>
-                                {
-                                    bool success = task.Result;
-                                    Debug.LogFormat("Register success: {0}", success);
-                                    if (success) shouldActive = false;
-                                });
-                });
+            {
+                bool isExistingAccount = task.Result;
+                if (isExistingAccount) alertExistingAccount = true;
+                else
+                    AccountManager.Register(email, name, password).ContinueWith(task =>
+                    {
+                        bool success = task.Result;
+                        Debug.LogFormat("Register success: {0}", success);
+                        if (success) shouldActive = false;
+                    });
+            });
     }
 
     private bool NoSimpleError(
