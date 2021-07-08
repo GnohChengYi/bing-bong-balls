@@ -21,6 +21,8 @@ Draggable
     public void OnDrag(PointerEventData eventData)
     {
         transform.localPosition += GetDeltaVector(eventData);
+        if (AtGarbage()) Garbage.Instance.TurnRed();
+        else Garbage.Instance.TurnBlack();
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -34,7 +36,7 @@ Draggable
             (float)((int)transform.localPosition.y / nearest) * nearest;
         transform.localPosition = new Vector3(snapX, snapY, 0);
         GameManager.Instance.garbageObject.SetActive(false);
-        if (ShouldDelete()) Destroy(gameObject);
+        if (AtGarbage()) Destroy(gameObject);
     }
 
     public Vector3 GetDeltaVector(PointerEventData eventData)
@@ -45,7 +47,7 @@ Draggable
         return new Vector3(deltaX, deltaY, 0);
     }
 
-    private bool ShouldDelete()
+    private bool AtGarbage()
     {
         Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
         return viewPos.x > 0.8 && viewPos.y > 0.9;
