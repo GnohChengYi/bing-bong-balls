@@ -28,17 +28,6 @@ public class AccountManager : MonoBehaviour
 
     public static AccountManager Instance { get; private set; }
 
-    private void Awake()
-    {
-        if (Instance != null) Destroy(Instance);
-        Instance = this;
-    }
-
-    private void OnDestroy()
-    {
-        if (Instance == this) Instance = null;
-    }
-
     private void Start()
     {
         if (firstTimeStartMenu) HandleFirstTimeStartMenu();
@@ -84,10 +73,15 @@ public class AccountManager : MonoBehaviour
 
     private void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
-        if (auth.CurrentUser == null) signInDialog.SetActive(true);
+        // signInDialog in old scene destroyed
+        // just let sign out button activate signInDialog
+        // hopefully no bug
+        if (signInDialog == null) return;
+        if (auth.CurrentUser == null || auth.CurrentUser.IsAnonymous)
+            signInDialog.SetActive(true);
     }
 
-    public async Task<bool> IsExistingAccount(string email)
+    public static async Task<bool> IsExistingAccount(string email)
     {
         IEnumerable<string> providers = Enumerable.Empty<string>();
         await auth.FetchProvidersForEmailAsync(email).ContinueWith((authTask) =>
@@ -207,6 +201,11 @@ public class AccountManager : MonoBehaviour
     public static string GetUserId()
     {
         return auth.CurrentUser.UserId;
+    }
+
+    public static string GetName()
+    {
+        return auth.CurrentUser.DisplayName;
     }
 
     public static bool SignedIn()

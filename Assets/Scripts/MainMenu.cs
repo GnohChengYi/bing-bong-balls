@@ -27,9 +27,6 @@ public class MainMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        // TODO remove after debug
-        AccountManager.Instance.SignOut();
-
         Application.Quit();
     }
 }

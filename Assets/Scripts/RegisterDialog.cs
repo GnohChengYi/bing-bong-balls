@@ -45,7 +45,7 @@ public class RegisterDialog : MonoBehaviour
         string password = passwordField.text;
         string confirmPassword = confirmPasswordField.text;
         if (NoSimpleError(email, name, password, confirmPassword))
-            AccountManager.Instance.IsExistingAccount(email).ContinueWith(task =>
+            AccountManager.IsExistingAccount(email).ContinueWith(task =>
             {
                 bool isExistingAccount = task.Result;
                 if (isExistingAccount) alertExistingAccount = true;

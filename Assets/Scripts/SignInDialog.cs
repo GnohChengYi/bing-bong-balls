@@ -13,7 +13,7 @@ public class SignInDialog : MonoBehaviour
     [SerializeField]
     private ToastCreator toastCreator;
 
-    private void Start()
+    private void OnEnable()
     {
         shouldActive = true;
     }
@@ -32,7 +32,8 @@ public class SignInDialog : MonoBehaviour
     {
         string email = emailField.text;
         string password = passwordField.text;
-        AccountManager.SignIn(email, password).ContinueWith(task => {
+        AccountManager.SignIn(email, password).ContinueWith(task =>
+        {
             bool success = task.Result;
             if (success) shouldActive = false;
             else alertError = true;
