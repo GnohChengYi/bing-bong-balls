@@ -11,38 +11,26 @@ public class HowtoButtons : MonoBehaviour
     [SerializeField]
     private GameObject next;
     
-    private static int page;
+    private static int page = 0;
 
     [SerializeField]
     private GameObject[] pages = new GameObject[5];
-    
-    void Start()
-    {
-        page = 0;
-        pages[0].SetActive(true);
-        pages[1].SetActive(false);
-        pages[2].SetActive(false);
-        pages[3].SetActive(false);
-        pages[4].SetActive(false);
-        previous.SetActive(false);
-        next.SetActive(true);
-    }
 
     public void PreviousButton()
     {
         pages[page].SetActive(false);
+        if (page == 4) next.SetActive(true);
         page--;
         pages[page].SetActive(true);
         if (page == 0) previous.SetActive(false);
-        if (page == 3) next.SetActive(true);
     }
 
     public void NextButton()
     {
         pages[page].SetActive(false);
+        if (page == 0) previous.SetActive(true);
         page++;
         pages[page].SetActive(true);
         if (page == 4) next.SetActive(false);
-        if (page == 1) previous.SetActive(true);
     }
 }

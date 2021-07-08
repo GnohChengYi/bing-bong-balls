@@ -239,7 +239,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: D:/NUSModules/PastSems/CP2106IndependentSoftwareDevelopmentProject(Orbital)/new.keystore
+  AndroidKeystoreName: C:/Users/Gabriel/Documents/CP2106/new.keystore
   AndroidKeyaliasName: bingbongballs
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

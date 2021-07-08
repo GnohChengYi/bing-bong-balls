@@ -58,8 +58,25 @@ public class Launcher : MonoBehaviour, ISelectHandler,
         ball.transform.position = transform.position + transform.up;
         ball.transform.rotation = transform.rotation;
         ball.GetComponent<Rigidbody2D>().velocity = transform.up * speed;
-        // TODO Change Ball Sprite (Still not working)
-        string ballPath = "Balls/" + name;
+        string ballPath = "Balls/" + Audio.lastSelectedInstrument;
         ball.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(ballPath);
     }
+
+    // TODO Change Ball Sprite
+    // public void Launch()
+    // {
+    //     GameObject ball = createBall();
+    //     ball.transform.position = transform.position + transform.up;
+    //     ball.transform.rotation = transform.rotation;
+    //     ball.GetComponent<Rigidbody2D>().velocity = transform.up * speed;
+        
+    // }
+    
+    // private GameObject createBall()
+    // {
+    //     GameObject newBall = Instantiate(ballPrefab);
+    //     string ballPath = "Balls/" + Audio.lastSelectedInstrument;
+    //     newBall.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(ballPath);
+    //     return newBall;
+    // }
 }
