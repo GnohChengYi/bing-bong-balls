@@ -10,10 +10,12 @@ public class
 Draggable
 : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         transform.localPosition += GetDeltaVector(eventData);
         transform.SetAsLastSibling();
+        GameManager.Instance.garbageObject.SetActive(true);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -27,10 +29,12 @@ Draggable
         // snap to grid: round position to nearest
         int nearest = 30;
         float snapX =
-            (float)((int) transform.localPosition.x / nearest) * nearest;
+            (float)((int)transform.localPosition.x / nearest) * nearest;
         float snapY =
-            (float)((int) transform.localPosition.y / nearest) * nearest;
+            (float)((int)transform.localPosition.y / nearest) * nearest;
         transform.localPosition = new Vector3(snapX, snapY, 0);
+        GameManager.Instance.garbageObject.SetActive(false);
+        if (ShouldDelete()) Destroy(gameObject);
     }
 
     public Vector3 GetDeltaVector(PointerEventData eventData)
@@ -39,5 +43,11 @@ Draggable
         float deltaX = eventData.delta.x * 1920 / screenSize;
         float deltaY = eventData.delta.y * 1920 / screenSize;
         return new Vector3(deltaX, deltaY, 0);
+    }
+
+    private bool ShouldDelete()
+    {
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        return viewPos.x > 0.8 && viewPos.y > 0.9;
     }
 }

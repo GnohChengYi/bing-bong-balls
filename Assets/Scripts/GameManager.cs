@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     // holds reference to currently selected launcher or block, if any
     public Element currentElement;
 
+    [SerializeField]
+    public GameObject garbageObject;
+
     public bool isRecording;
 
     public bool isSharp;
