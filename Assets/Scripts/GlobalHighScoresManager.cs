@@ -1,6 +1,7 @@
 using Firebase.Database;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -17,18 +18,13 @@ public class GlobalHighScoresManager : MonoBehaviour
         List<UserScore> highScores = new List<UserScore>();
         await query.GetValueAsync().ContinueWith(task =>
         {
+            DataSnapshot snapshot = null;
             if (task.IsFaulted) Debug.LogErrorFormat(
                 "GetValueAsync encountered an error: {0}", task.Exception);
-            else if (task.IsCompleted)
-            {
-                Debug.Log("global high score query task completed");
-                DataSnapshot snapshot = task.Result;
-                Debug.LogFormat("{0}; length={1}", snapshot, snapshot.ChildrenCount);
-                highScores = GetHighScoresFromSnapshot(snapshot);
-            }
-        });
-        foreach (UserScore userScore in highScores)
-            Debug.LogFormat("{0}: {1}", userScore.userId, userScore.score);
+            else if (task.IsCompleted) snapshot = task.Result;
+            return snapshot;
+        }).ContinueWith(task => GetHighScoresFromSnapshot(task.Result)).Unwrap()
+            .ContinueWith(task => highScores = task.Result);
         return highScores;
     }
 
@@ -39,11 +35,12 @@ public class GlobalHighScoresManager : MonoBehaviour
             .ContinueWith(Task => Debug.Log("Submitted score to global high scores"));
     }
 
-    private static List<UserScore> GetHighScoresFromSnapshot(DataSnapshot snapshot)
+    private static async Task<List<UserScore>> GetHighScoresFromSnapshot(DataSnapshot snapshot)
     {
         List<UserScore> result = new List<UserScore>();
         foreach (DataSnapshot record in snapshot.Children)
-            result.Add(UserScore.CreateScoreFromRecord(record));
+            await UserScore.CreateScoreFromRecord(record).ContinueWith(
+                task => result.Add(task.Result));
         result.Reverse();
         return result;
     }

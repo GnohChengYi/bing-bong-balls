@@ -118,10 +118,10 @@ public class AccountManager : MonoBehaviour
                         newUser = task.Result;
                         UserProfile profile = new UserProfile();
                         profile.DisplayName = name;
-                        newUser.UpdateUserProfileAsync(profile);
-                        Debug.LogFormat("Firebase user created successfully: {0} ({1})",
-                            newUser.DisplayName, newUser.UserId);
-                        welcomeUser = true;
+                        newUser.UpdateUserProfileAsync(profile).ContinueWith(
+                            updateTask => welcomeUser = true);
+                        string path = GetUserNamePath(newUser.UserId);
+                        database.GetReference(path).SetValueAsync(name);
                     }
                 });
         return newUser != null;
@@ -142,9 +142,9 @@ public class AccountManager : MonoBehaviour
                 else
                 {
                     user = task.Result;
+                    welcomeUser = true;
                     Debug.LogFormat("Signed In successfully: {0}, ({1})",
                         user.DisplayName, user.UserId);
-                    welcomeUser = true;
                 }
             }
         );
@@ -219,9 +219,22 @@ public class AccountManager : MonoBehaviour
         auth.SignOut();
     }
 
+    public static async Task<string> GetDisplayNameByUserId(string userId)
+    {
+        string displayName = "ERROR: NO NAME";
+        await database.GetReference(GetUserNamePath(userId)).GetValueAsync().
+            ContinueWith(task => displayName = (string)task.Result.Value);
+        return displayName;
+    }
+
     private static string GetUserHighScorePath(string puzzle)
     {
         return "users/" + auth.CurrentUser.UserId + "/high-scores/" + puzzle;
+    }
+
+    private static string GetUserNamePath(string userId)
+    {
+        return "users/" + userId + "/name";
     }
 
     private static bool ShouldSubmitToGlobalHighScore(

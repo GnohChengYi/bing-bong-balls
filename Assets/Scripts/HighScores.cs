@@ -59,9 +59,7 @@ public class HighScores : MonoBehaviour
 
     public void ReloadHighScores()
     {
-        Debug.Log("DisplayHighScores");
         string puzzle = dropdown.captionText.text;
-        Debug.LogFormat("Puzzle: {0}", puzzle);
         GlobalHighScoresManager.GetHighScores(puzzle).ContinueWith(task =>
         {
             if (task.IsFaulted) Debug.LogErrorFormat(
@@ -84,7 +82,7 @@ public class HighScores : MonoBehaviour
     {
         Text nameText = highScoreTransform.GetChild(0).GetComponent<Text>();
         Text scoreText = highScoreTransform.GetChild(1).GetComponent<Text>();
-        nameText.text = highScore.userId;
+        nameText.text = highScore.displayName;
         scoreText.text = highScore.score.ToString();
     }
 }
