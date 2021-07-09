@@ -69,7 +69,6 @@ public class SimulationPanel : MonoBehaviour
                     Element currentElement = GameManager.Instance.currentElement;
                     if (currentElement is Launcher)
                     {
-                        // TODO do not shoot when launcher is selected
                         Launcher launcher = (Launcher)currentElement;
                         if (launcher.isActive)
                         {

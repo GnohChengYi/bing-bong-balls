@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Launcher : MonoBehaviour, ISelectHandler,
-    IDeselectHandler, IBeginDragHandler, Element
+    IDeselectHandler, IPointerUpHandler, Element
 {
     [SerializeField]
     private GameObject ballPrefab;
@@ -39,7 +39,7 @@ public class Launcher : MonoBehaviour, ISelectHandler,
         isActive = false;
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
         isActive = false;
     }
