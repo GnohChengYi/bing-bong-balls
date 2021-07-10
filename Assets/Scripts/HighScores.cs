@@ -20,7 +20,6 @@ public class HighScores : MonoBehaviour
     private void Start()
     {
         if (Puzzle.puzzles == null) Puzzle.Init();
-        // TODO populate dropdown with valid puzzles
         List<string> options = GetOptions();
         dropdown.ClearOptions();
         dropdown.AddOptions(options);

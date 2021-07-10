@@ -16,6 +16,8 @@ public class GlobalHighScoresManager : MonoBehaviour
         Query query = AccountManager.database.GetReference(path)
             .OrderByValue().LimitToLast(limit);
         List<UserScore> highScores = new List<UserScore>();
+        // might cause performance issue theoretically, but so far not obsered yet
+        query.KeepSynced(true);
         await query.GetValueAsync().ContinueWith(task =>
         {
             DataSnapshot snapshot = null;
