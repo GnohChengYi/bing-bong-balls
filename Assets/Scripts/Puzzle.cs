@@ -30,9 +30,8 @@ public class Puzzle
             AudioClip audioClip = Audio.GetClip(Audio.instruments[0], note);
             float[] samples = new float[audioClip.samples * audioClip.channels];
             audioClip.GetData(samples, 0);
+            Array.Resize(ref samples, 200000);
             audioDataList.AddRange(samples);
-            float[] muteSamples = new float[samples.Length / 2];
-            audioDataList.AddRange(muteSamples);
         }
         return Audio.ListToClip(audioDataList);
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayPuzzleButton : MonoBehaviour
+public class PlayPuzzle : MonoBehaviour
 {
     public void OnClick()
     {
