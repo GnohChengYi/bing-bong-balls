@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HighScores.unity
     guid: 5dcc2aa0aa85d0c4ba29f9c64c00e15f
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: e0f2a1e83fd53854a9340668929a56e3
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 1fd7fa472e10714468c10653056ca83a, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c27c46f90c8330147a36752853e0c502, type: 2}

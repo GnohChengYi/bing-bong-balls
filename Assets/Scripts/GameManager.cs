@@ -30,9 +30,6 @@ public class GameManager : MonoBehaviour
     private AudioClip recordingClip;
 
     [SerializeField]
-    private GameObject guideDialog;
-
-    [SerializeField]
     private GameObject saveDialog;
     private ToastCreator toastCreator;
 
@@ -48,7 +45,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (GuideController.GetGuidePref()) guideDialog.SetActive(true);
         if (Puzzle.selectedPuzzle == null)
         {
             mode = Mode.FREE_PLAY;
@@ -102,7 +98,6 @@ public class GameManager : MonoBehaviour
 
     public void ShowSaveDialog()
     {
-        // TODO disable (set enabled=false or sth) touch on simulation panel and toolbar
         saveDialog.SetActive(true);
     }
 
@@ -175,7 +170,7 @@ public class GameManager : MonoBehaviour
 
     public bool HaveDialogInFront()
     {
-        return guideDialog.activeSelf || saveDialog.activeSelf ||
+        return saveDialog.activeSelf ||
             scoreDialog.activeSelf || exitDialog.activeSelf;
     }
 }
