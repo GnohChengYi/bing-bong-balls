@@ -38,7 +38,9 @@ public class Puzzle
 
     public int GetScore()
     {
-        return notes.Count - EditDistanceBetweenNotesAndSubmission();
+        int distance = EditDistanceBetweenNotesAndSubmission();
+        if (distance < notes.Count) return notes.Count - distance;
+        else return 0;
     }
 
     // Wagner-Fischer algorithm
