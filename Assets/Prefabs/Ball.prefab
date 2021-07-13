@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c713377d3dccf824d860e378e9cd56ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ripplePrefab: {fileID: 4097109582623488864, guid: 7c66526e62ac9e242963acb113a4bde3, type: 3}
 --- !u!222 &1812173340268782033
 CanvasRenderer:
   m_ObjectHideFlags: 0

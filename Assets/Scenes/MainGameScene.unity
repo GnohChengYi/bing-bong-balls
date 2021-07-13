@@ -2079,6 +2079,50 @@ MonoBehaviour:
   b4: {fileID: 1018392369}
   b5: {fileID: 1110261508}
   b6: {fileID: 1404080531}
+--- !u!1 &491033371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 491033372}
+  - component: {fileID: 491033373}
+  m_Layer: 0
+  m_Name: RippleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &491033372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491033371}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 167.67946, y: 253.06099, z: -593.0581}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &491033373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491033371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d14c9d5c7c066c4185ae6ebb0651531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ripplePrefab: {fileID: 4097109582623488864, guid: 7c66526e62ac9e242963acb113a4bde3, type: 3}
 --- !u!1 &502483462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,7 +2250,6 @@ MonoBehaviour:
   garbageObject: {fileID: 1357953019}
   isRecording: 0
   isSharp: 0
-  guideDialog: {fileID: 0}
   saveDialog: {fileID: 974587474}
   scoreDialog: {fileID: 1892122305}
   exitDialog: {fileID: 819321533}

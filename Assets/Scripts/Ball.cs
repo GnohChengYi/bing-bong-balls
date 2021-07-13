@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -17,6 +16,7 @@ public class Ball : MonoBehaviour
         GameObject other = collision.gameObject;
         if (other.tag == "Block")
         {
+            CreateRipples(collision);
             string instrument = gameObject.name;
             string note = other.name;
             AudioClip audioClip = Audio.GetClip(instrument, note);
@@ -30,13 +30,12 @@ public class Ball : MonoBehaviour
 
     private void OnBecameInvisible()
     {
-        // TODO check all balls leave screen before wrapping up
-        UpdateHighScore();
         Destroy(gameObject);
     }
 
-    private void UpdateHighScore()
+    private void CreateRipples(Collision2D collision)
     {
-        // TODO send high score to Firebase
+        foreach (ContactPoint2D contact in collision.contacts)
+            RippleManager.CreateRippleAt(contact);
     }
 }
