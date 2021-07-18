@@ -13,6 +13,13 @@ public class SimulationPanel : MonoBehaviour
     [SerializeField]
     private GameObject blockPrefab;
 
+    [SerializeField]
+    private GameObject LauncherButton;
+    [SerializeField]
+    private GameObject AddBlockButton;
+    [SerializeField]
+    private GameObject SelectButton;
+
     private RectTransform rectTransform;
 
     public float scale;
@@ -56,6 +63,9 @@ public class SimulationPanel : MonoBehaviour
                     string launcherPath = "Launchers/" + currLauncher.name;
                     currLauncher.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>(launcherPath);
                     GameManager.Instance.operation = Operation.SELECT;
+                    LauncherButton.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Add Launcher Button");
+                    AddBlockButton.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Add Block Button");
+                    SelectButton.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Select Mode Button");
                 }
                 else if (GameManager.Instance.operation == Operation.CREATE_BLOCK)
                 {

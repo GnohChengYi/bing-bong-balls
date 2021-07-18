@@ -11,6 +11,13 @@ public class RecordButtonScript : MonoBehaviour
     [SerializeField]
     private Sprite StopImg;
 
+    [SerializeField]
+    private GameObject LauncherButton;
+    [SerializeField]
+    private GameObject AddBlockButton;
+    [SerializeField]
+    private GameObject SelectButton;
+
     private Image image;
 
     private void Start()
@@ -21,6 +28,9 @@ public class RecordButtonScript : MonoBehaviour
     public void OnRecordingClick()
     {
         GameManager.Instance.operation = Operation.SELECT;
+        LauncherButton.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Add Launcher Button");
+        AddBlockButton.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Add Block Button");
+        SelectButton.GetComponent<Image>().overrideSprite = Resources.Load<Sprite>("Select Mode Button");
         if (!GameManager.Instance.isRecording)
         {
             image.overrideSprite = StopImg;
