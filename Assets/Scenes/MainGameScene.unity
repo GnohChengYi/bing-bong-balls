@@ -1601,9 +1601,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f89ee19d881a594c9a3250e15785fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LauncherButton: {fileID: 0}
-  AddBlockButton: {fileID: 0}
-  SelectButton: {fileID: 0}
+  LauncherButton: {fileID: 1807151941}
+  AddBlockButton: {fileID: 1176088167}
+  SelectButton: {fileID: 400861651}
 --- !u!1 &437665277
 GameObject:
   m_ObjectHideFlags: 0
@@ -6589,9 +6589,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f89ee19d881a594c9a3250e15785fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LauncherButton: {fileID: 0}
-  AddBlockButton: {fileID: 0}
-  SelectButton: {fileID: 0}
+  LauncherButton: {fileID: 1807151941}
+  AddBlockButton: {fileID: 1176088167}
+  SelectButton: {fileID: 400861651}
 --- !u!1 &1191375598
 GameObject:
   m_ObjectHideFlags: 0
@@ -9060,9 +9060,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launcherPrefab: {fileID: 5175876598057331519, guid: 1976aa02a653a4d4893db77476c5a7d0, type: 3}
   blockPrefab: {fileID: 7972078747714473479, guid: f154997c43ea746429adb242b30a5711, type: 3}
-  LauncherButton: {fileID: 0}
-  AddBlockButton: {fileID: 0}
-  SelectButton: {fileID: 0}
+  LauncherButton: {fileID: 1807151941}
+  AddBlockButton: {fileID: 1176088167}
+  SelectButton: {fileID: 400861651}
   scale: 0
 --- !u!114 &1680945365
 MonoBehaviour:
@@ -10011,9 +10011,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f89ee19d881a594c9a3250e15785fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LauncherButton: {fileID: 0}
-  AddBlockButton: {fileID: 0}
-  SelectButton: {fileID: 0}
+  LauncherButton: {fileID: 1807151941}
+  AddBlockButton: {fileID: 1176088167}
+  SelectButton: {fileID: 400861651}
 --- !u!1 &1839863331
 GameObject:
   m_ObjectHideFlags: 0
