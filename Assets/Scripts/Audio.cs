@@ -9,7 +9,9 @@ public class Audio
         instruments =
             new string[] {
                 "Piano",
-                "Acoustic Guitar"
+                "Guitar",
+                "Strings",
+                "Synth"
             };
 
     private static string[]
@@ -79,7 +81,7 @@ public class Audio
 
     public static string lastSelectedInstrument = "Piano";
 
-    public static string lastSelectedNote = "a3";
+    public static string lastSelectedNote = "a4";
 
     // instrument -> note -> clip
     private static Dictionary<string, Dictionary<string, AudioClip>>

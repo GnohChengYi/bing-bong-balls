@@ -11,6 +11,16 @@ public class LauncherMenu : MonoBehaviour
 
     public void OnGuitarClick()
     {
-        Audio.lastSelectedInstrument = "Acoustic Guitar";
+        Audio.lastSelectedInstrument = "Guitar";
+    }
+
+    public void OnStringsClick()
+    {
+        Audio.lastSelectedInstrument = "Strings";
+    }
+
+    public void OnSynthClick()
+    {
+        Audio.lastSelectedInstrument = "Synth";
     }
 }
