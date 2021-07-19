@@ -4,23 +4,23 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
-    // TODO update total tutorials accordingly
-    private const int total = 3;
-    private int completed = 0;
+    private const int lastIndex = 15;
+    private int current;
 
     [SerializeField]
     private Image image;
 
     private void Start()
     {
+        current = 0;
         DisplayCurrentTutorial();
     }
 
     public void Next()
     {
-        if (completed < total)
+        if (current < lastIndex)
         {
-            completed++;
+            current++;
             DisplayCurrentTutorial();
         }
         else SceneManager.LoadScene(0);
@@ -28,7 +28,7 @@ public class Tutorial : MonoBehaviour
 
     private void DisplayCurrentTutorial()
     {
-        string path = "Tutorials/Tutorial" + completed.ToString();
+        string path = "Tutorials/Tutorial" + current.ToString();
         Sprite nextSprite = Resources.Load<Sprite>(path);
         image.sprite = nextSprite;
     }

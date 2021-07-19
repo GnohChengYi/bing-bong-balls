@@ -3317,9 +3317,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RecordImg: {fileID: 21300000, guid: 5008b1b9eba30b3409f60e6623132969, type: 3}
   StopImg: {fileID: 21300000, guid: 91ba67b4b430ad348b2b8069184b3734, type: 3}
-  LauncherButton: {fileID: 0}
-  AddBlockButton: {fileID: 0}
-  SelectButton: {fileID: 0}
+  LauncherButton: {fileID: 1807151941}
+  AddBlockButton: {fileID: 1176088167}
+  SelectButton: {fileID: 400861651}
 --- !u!1 &786270577
 GameObject:
   m_ObjectHideFlags: 0
@@ -3678,7 +3678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 566.88495, y: -870.25}
+  m_AnchoredPosition: {x: 529.07477, y: -942.52905}
   m_SizeDelta: {x: 800, y: 1600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &794068331
@@ -9648,7 +9648,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1781141658}
         m_TargetAssemblyTypeName: LauncherMenu, Assembly-CSharp
-        m_MethodName: OnPianoClick
+        m_MethodName: OnSynthClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10864,7 +10864,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1979253366}
         m_TargetAssemblyTypeName: LauncherMenu, Assembly-CSharp
-        m_MethodName: OnPianoClick
+        m_MethodName: OnStringsClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
