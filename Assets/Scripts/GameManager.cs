@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         audioDataList = new List<float>();
         toastCreator = GetComponent<ToastCreator>();
         isSharp = false;
+        BackgroundMusic.Instance.StopMusic();
     }
 
     private void Update()
