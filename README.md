@@ -13,7 +13,7 @@ Enjoy the music that you created!
 
 
 ## Installation
-For Android users, find the APK and download it [here](https://github.com/GnohChengYi/bing-bong-balls/blob/main/Milestone3APK3.apk).
+For Android users, find the APK and download it [here](https://github.com/GnohChengYi/bing-bong-balls/blob/main/Milestone3APK4.apk).
 
 Supports for other platforms are under development. 
 Check out this repository again in the future!
